@@ -1,0 +1,8 @@
+dataset,field,example_nrows,time,parallel
+aminer-author-json,F1,200,2109.50,true
+aminer-author-json,F2,200,2200.25,true
+aminer-author-json,F3,200,2240.33,true
+aminer-author-json,F4,200,2254.33,true
+aminer-author-json,F5,200,2170.33,true
+aminer-author-json,F6,200,2357.00,true
+aminer-author-json,F7,200,2454.00,true

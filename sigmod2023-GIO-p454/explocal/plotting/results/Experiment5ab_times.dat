@@ -1,0 +1,11 @@
+dataset,field,example_nrows,time,parallel
+aminer-paper-json,F1,200,2176.67,true
+aminer-paper-json,F2,200,2300.75,true
+aminer-paper-json,F3,200,2535.50,true
+aminer-paper-json,F4,200,2805.33,true
+aminer-paper-json,F5,200,2855.50,true
+aminer-paper-json,F6,200,3002.33,true
+aminer-paper-json,F7,200,2960.67,true
+aminer-paper-json,F8,200,3485.00,true
+aminer-paper-json,F9,200,3441.00,true
+aminer-paper-json,F10,200,3418.00,true

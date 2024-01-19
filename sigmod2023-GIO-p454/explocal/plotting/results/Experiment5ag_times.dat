@@ -1,0 +1,11 @@
+dataset,field,example_nrows,time,parallel
+message-hl7,F1,200,2550.00,true
+message-hl7,F2,200,2722.67,true
+message-hl7,F3,200,2852.25,true
+message-hl7,F4,200,2946.00,true
+message-hl7,F5,200,3537.67,true
+message-hl7,F6,200,4072.67,true
+message-hl7,F7,200,4389.67,true
+message-hl7,F8,200,5170.25,true
+message-hl7,F9,200,6069.00,true
+message-hl7,F10,200,6873.33,true

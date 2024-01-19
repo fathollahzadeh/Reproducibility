@@ -1,0 +1,17 @@
+baseline,dataset,query,time,parallel
+GIO,aminer-paper,Q1,10405.00,true
+GIO,aminer-paper,Q2,10426.75,true
+GIO,aminer-paper,Q3,11134.75,true
+GIO,aminer-paper,Q4,12891.00,true
+GIO,aminer-paper,Q1,24545.00,false
+GIO,aminer-paper,Q2,25686.33,false
+GIO,aminer-paper,Q3,26765.00,false
+GIO,aminer-paper,Q4,26357.00,false
+SystemDS+aminer-paper,aminer-paper,Q1,15338.00,true
+SystemDS+aminer-paper,aminer-paper,Q2,15555.00,true
+SystemDS+aminer-paper,aminer-paper,Q3,15396.50,true
+SystemDS+aminer-paper,aminer-paper,Q4,15517.00,true
+SystemDS+aminer-paper,aminer-paper,Q1,27168.00,false
+SystemDS+aminer-paper,aminer-paper,Q2,27042.50,false
+SystemDS+aminer-paper,aminer-paper,Q3,27566.67,false
+SystemDS+aminer-paper,aminer-paper,Q4,28170.50,false

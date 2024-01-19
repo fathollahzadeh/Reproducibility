@@ -1,0 +1,13 @@
+baseline,dataset,query,time,parallel
+GIO,yelp-csv,Q1,17900.67,true
+GIO,yelp-csv,Q2,20402.75,true
+GIO,yelp-csv,Q1,32056.50,false
+GIO,yelp-csv,Q2,33023.00,false
+SystemDS+CSV,yelp-csv,Q1,21405.25,true
+SystemDS+CSV,yelp-csv,Q2,21502.00,true
+SystemDS+CSV,yelp-csv,Q1,43035.00,false
+SystemDS+CSV,yelp-csv,Q2,44136.00,false
+Python,yelp-csv,Q1,41747.00,true
+Python,yelp-csv,Q2,64756.33,true
+Python,yelp-csv,Q1,41747.00,false
+Python,yelp-csv,Q2,64756.33,false

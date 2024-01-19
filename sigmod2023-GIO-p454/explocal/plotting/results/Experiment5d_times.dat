@@ -1,0 +1,15 @@
+baseline,dataset,field,time,parallel
+GIO,aminer-author,F1,6622.67,true
+GIO,aminer-author,F2,6879.67,true
+GIO,aminer-author,F3,6957.67,true
+GIO,aminer-author,F4,6679.00,true
+GIO,aminer-author,F5,7564.33,true
+GIO,aminer-author,F6,7431.00,true
+GIO,aminer-author,F7,7452.67,true
+SystemDS+aminer-author,aminer-author,F1,8216.00,true
+SystemDS+aminer-author,aminer-author,F2,8255.75,true
+SystemDS+aminer-author,aminer-author,F3,8181.33,true
+SystemDS+aminer-author,aminer-author,F4,8099.00,true
+SystemDS+aminer-author,aminer-author,F5,8106.00,true
+SystemDS+aminer-author,aminer-author,F6,8118.00,true
+SystemDS+aminer-author,aminer-author,F7,8073.00,true

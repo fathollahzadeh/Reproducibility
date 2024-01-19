@@ -1,0 +1,10 @@
+dataset,field,example_nrows,time,parallel
+yelp-csv,F1,200,2046.25,true
+yelp-csv,F2,200,2076.33,true
+yelp-csv,F3,200,2047.67,true
+yelp-csv,F4,200,2069.33,true
+yelp-csv,F5,200,2076.33,true
+yelp-csv,F6,200,2133.00,true
+yelp-csv,F7,200,2147.50,true
+yelp-csv,F8,200,2160.00,true
+yelp-csv,F9,200,2093.00,true

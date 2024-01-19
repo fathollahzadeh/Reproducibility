@@ -1,0 +1,13 @@
+baseline,dataset,query,time,parallel
+GIO,message-hl7,Q1,31914.00,true
+GIO,message-hl7,Q2,36155.00,true
+GIO,message-hl7,Q1,120770.33,false
+GIO,message-hl7,Q2,107999.67,false
+Python,message-hl7,Q1,7428143.50,true
+Python,message-hl7,Q2,7585131.00,true
+Python,message-hl7,Q1,7428143.50,false
+Python,message-hl7,Q2,7585131.00,false
+SystemDS+message-hl7,message-hl7,Q1,2446495,true
+SystemDS+message-hl7,message-hl7,Q2,2512810,true
+SystemDS+message-hl7,message-hl7,Q1,2446495,false
+SystemDS+message-hl7,message-hl7,Q2,2512810,false

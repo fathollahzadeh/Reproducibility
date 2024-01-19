@@ -1,0 +1,17 @@
+baseline,dataset,query,time,parallel
+GIO,aminer-author,Q1,6341.75,true
+GIO,aminer-author,Q2,6424.67,true
+GIO,aminer-author,Q3,6924.67,true
+GIO,aminer-author,Q4,7038.75,true
+GIO,aminer-author,Q1,13650.67,false
+GIO,aminer-author,Q2,14118.00,false
+GIO,aminer-author,Q3,15500.50,false
+GIO,aminer-author,Q4,14211.33,false
+SystemDS+aminer-author,aminer-author,Q1,8538.67,true
+SystemDS+aminer-author,aminer-author,Q2,7959.33,true
+SystemDS+aminer-author,aminer-author,Q3,8159.00,true
+SystemDS+aminer-author,aminer-author,Q4,7880.33,true
+SystemDS+aminer-author,aminer-author,Q1,14370.67,false
+SystemDS+aminer-author,aminer-author,Q2,14164.00,false
+SystemDS+aminer-author,aminer-author,Q3,14385.33,false
+SystemDS+aminer-author,aminer-author,Q4,14520.00,false
