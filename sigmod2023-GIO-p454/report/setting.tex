@@ -1,0 +1,60 @@
+\DeclareMathOperator*{\argmin}{arg\,min}
+\sloppy
+\clubpenalty = 10000
+\widowpenalty = 10000
+\brokenpenalty = 10000
+\frenchspacing
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+\copyrightyear{2023}
+
+
+% \received{October 2022}
+% \received[revised]{January 2023}
+% \received[accepted]{February 2023}
+
+\setcopyright{acmlicensed}
+\acmJournal{PACMMOD}
+\acmYear{2023} \acmVolume{1} \acmNumber{2} \acmArticle{120} \acmMonth{6} \acmPrice{15.00}\acmDOI{10.1145/3589265}
+
+%\keywords{Raw Data; Custom Data Format; Efficient Readers; Data Loading}
+
+% \ccsdesc[500]{Information systems~Database management system engines}
+% \ccsdesc[500]{Information systems~Data scans}
+% \ccsdesc[500]{Information systems~Record and block layout}
+% \ccsdesc[500]{Theory of computation~Database query processing and optimization (theory)}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+
+\lstset{
+  language=bash,
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{backcolour},  
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstdefinestyle{ascii-tree}{
+  literate={├}{|}1 {─}{--}1 {└}{+}1 
+}

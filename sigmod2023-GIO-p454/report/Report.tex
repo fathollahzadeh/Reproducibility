@@ -1,0 +1,170 @@
+\documentclass[acmsmall,screen,pdfa]{acmart}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+\usepackage{pgfplots}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{listings}
+\usetikzlibrary{arrows.meta, chains, positioning, shapes.symbols}
+\usetikzlibrary{decorations,calligraphy}
+\usepackage{numprint}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{amsmath,mleftright}
+\usepackage{multirow}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newcommand{\eat}[1]{}
+\usepackage{balance}
+
+
+\newtheorem{definex}{Definition}
+\npstyleenglish
+
+\let\bbordermatrix\bordermatrix
+\patchcmd{\bbordermatrix}{8.75}{4.75}{}{}
+\patchcmd{\bbordermatrix}{\left(}{\left[}{}{}
+\patchcmd{\bbordermatrix}{\right)}{\right]}{}{}
+
+% math commands
+\newcommand{\mat}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\card}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\num}[1]{\numprint{#1}}
+
+\input{setting.tex}
+
+
+
+\begin{document}
+%\fancyhead{}
+
+\title[GIO: Generating Efficient Matrix and Frame Readers for Custom Data Formats by Example]{GIO: Generating Efficient Matrix and Frame Readers for Custom Data Formats by Example\cite{GIO}}
+
+\author{Saeed Fathollahzadeh} 
+\orcid{0000-0003-3723-6191}
+\affiliation{
+  \institution{Graz University of Technology \& Know-Center GmbH}
+  \country{Austria}}
+
+\author{Matthias Boehm} 
+%\authornote{This work was partially done at Graz University of Technology, Austria.}
+\orcid{0000-0003-1344-3663}
+\affiliation{
+  \institution{Technische Universität Berlin}
+  \country{Germany}}
+
+\renewcommand{\shortauthors}{Saeed Fathollahzadeh \& Matthias Boehm}
+
+\maketitle
+
+This guide provides instructions for replicating the paper's findings. To ensure successful execution, it is essential to meet specific setup requirements.
+
+\section{Source Code Info}
+\begin{itemize}
+  \item \textbf{Repository:} Apache SystemDS (\url{https://github.com/apache/systemds},\\ commit: \hyperlink{https://github.com/apache/systemds/commit/82d9d130861be8e36d37a08c22cdd8d3231de6c2}{82d9d130861be8e36d37a08c22cdd8d3231de6c2})
+  \item \textbf{Reproducibility Repository:} \url{https://github.com/damslab/reproducibility/tree/master/sigmod2023-GIO-p454}
+  \item \textbf{Programming Language:} \texttt{Java}, \texttt{Clang++10}, \texttt{Python 3.8}, \texttt{SystemDS} 
+  \item \textbf{Packages/Libraries Needed:} \texttt{JDK 11}, \texttt{cmake}, \texttt{RapidJSON}, \texttt{Clang++}, \texttt{Python}, \texttt{Git}, \texttt{Maven}, \texttt{pdflatex}, \texttt{unzip}, \texttt{unrar}, \texttt{xz-utils}
+\end{itemize}  
+
+\section{Experiment Index Structure}
+\begin{lstlisting}[style=ascii-tree]
+  .
+  ├── baselines
+      ├── JavaBaselines
+      ├── PythonPandas
+      └── RapidJSONCPP
+  ├── datagen
+  ├── explocal
+      ├── exp1_micor_bench_identification
+      ├── exp2_identification_1k_10k
+      ├── exp3_early
+      ├── exp4_micro_bench
+      ├── exp5_systematic
+      ├── exp6_end_to_end
+      └── plotting
+  ├── load-had3.3-java11.sh
+  ├── plots
+  ├── run0LoadConfig.sh
+  ├── run1SetupDependencies.sh
+  ├── run2SetupBaseLines.sh
+  ├── run3DownloadData.sh
+  ├── run4GenerateData.sh
+  ├── run5LocalExperiments.sh
+  ├── run6PlotResults.sh
+  └── runAll.sh
+\end{lstlisting}
+
+
+\section{Install and Config}
+\textbf{Hardware and Software Info:} We ran all experiments on a server node an AMD EPYC 7302 CPU @ 3.0-3.3, GHz (16 physical/32 virtual cores) with 128 GB, two 480 GB SATA SSDs (system/home), and twelve 2 TB SATA HDDs. All reader experiments utilize a single SSD.
+
+\textbf{Setup and Experiments:} The repository is pre-populated with the paper's experimental results (\texttt{"results"}), individual plots (\texttt{"plots"}), and SystemDS source code. 
+
+To acquire installation and config, follow these steps:
+\begin{lstlisting}
+  ./run0LoadConfig.sh
+  ./run1SetupDependencies.sh;
+  ./run2SetupBaseLines.sh;
+\end{lstlisting}
+
+\textbf{Note 1.} \texttt{"run0LoadConfig.sh"} is crucial to execute before proceeding with other steps. It loads JVM memory settings and configures Hadoop settings. Please refrain from commenting out this line when running the steps 
+
+\section{Data Preparation}
+The datasets will be downloaded and generated automatically, follow these steps:
+\begin{lstlisting}
+  ./run3DownloadData.sh;
+  ./run4GenerateData.sh;
+\end{lstlisting}
+
+\section{Run Experiments}
+To execute all experiments, simply run \texttt{"run5LocalExperiments.sh"}. The experiments will commence, collecting output results.
+\begin{lstlisting}
+  ./run5LocalExperiments.sh;
+\end{lstlisting}
+
+\textbf{Note 2.} Our configuration entails running all experiments five times, making it a more time-consuming process.
+
+\section{Plotting}
+For plotting, simply run \texttt{"run6PlotResults.sh"}: 
+\begin{lstlisting}
+  ./run6PlotResults.sh;
+\end{lstlisting}
+
+Since the experiments are run five times, at the end of the experiments, we will merge all of them and create average results.
+
+
+\section{Run All}
+The entire experimental evaluation can be run via \texttt{"runAll.sh"}, which deletes the results and plots and performs setup, dataset download, dataset preparation, dataset generating, local experiments, and plotting. However, for a more controlled evaluation, we recommend running the individual steps separately.
+
+\begin{lstlisting}
+  ./run0LoadConfig.sh
+  ./run1SetupDependencies.sh;
+  ./run2SetupBaseLines.sh;
+  ./run3DownloadData.sh;
+  ./run4GenerateData.sh;
+  ./run5LocalExperiments.sh;
+  ./run6PlotResults.sh;
+\end{lstlisting}
+
+Please be aware that this process may take a considerable amount of time, and you may prefer to have better control over the timing of each experiment. 
+
+\textbf{Note 3.} we are clearing the system cache using the command \texttt{"echo 3 >/proc/sys/vm/drop\_caches \&\& sync"}. Therefore, it is necessary to use \texttt{"sudo"} when executing \texttt{"runAll.sh"} (e.g., \texttt{"sudo runAll.sh"}).
+
+
+
+\balance
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{References}
+
+\end{document}
+\endinput
+

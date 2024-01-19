@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="maven-antrun-" default="copy and rename JAR">
-  <target name="copy and rename JAR">
-    <copy file="/home/saeed/Documents/Github/reproducibility/sigmod2023-GIO-p454/baselines/JavaBaselines/target/JavaBaselines-1.0-SNAPSHOT.jar" tofile="/home/saeed/Documents/Github/reproducibility/sigmod2023-GIO-p454/baselines/JavaBaselines/target/JavaBaselines.jar" />
-  </target>
-</project>
