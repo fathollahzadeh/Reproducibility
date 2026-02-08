@@ -1,0 +1,9 @@
+torch
+torchvision
+jax
+jaxlib
+apache-tvm
+systemds
+numpy
+pandas
+matplotlib
