@@ -11,7 +11,7 @@ CMDTorchFXExp1=./explocal/exp1_Baselines/runExperiment1-TorchFX4m.sh
 CMDTVMExp1=./explocal/exp1_Baselines/runExperiment1-TVM4m.sh
 CMDJAXExp1=./explocal/exp1_Baselines/runExperiment1-JAX4m.sh
 
-# $CMDSystemDSExp1
-# $CMDTorchFXExp1
-# $CMDTVMExp1
+$CMDSystemDSExp1
+$CMDTorchFXExp1
+$CMDTVMExp1
 $CMDJAXExp1

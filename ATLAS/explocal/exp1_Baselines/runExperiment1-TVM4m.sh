@@ -1,3 +1,4 @@
+log_file_name=ABCD.dat
 root_path="$(pwd)"
 data_path="${root_path}/data"
 matrix_data_path="${root_path}/data/matrix"
@@ -9,4 +10,8 @@ source venv/bin/activate
 
 CMD="python TVM_exp1_ABCD.py ${matrix_data_path}"
 
+
+start=$(date +%s%N)
 $CMD
+end=$(date +%s%N)
+echo "ABCD,TVM,"$((($end - $start) / 1000000)) >>${root_path}/results/$log_file_name

@@ -1,3 +1,4 @@
+log_file_name=ABCD.dat
 root_path="$(pwd)"
 data_path="${root_path}/data"
 matrix_data_path="${root_path}/data/matrix"
@@ -18,4 +19,8 @@ CMD="java -Xmx28g -Xms28g -Xmn2g --add-modules jdk.incubator.vector \
     -stats -nvargs out=$out_path matrix_path=$matrix_data_path
     -config SystemDS-config.xml"
 
+start=$(date +%s%N)
 $CMD -f $dml_path
+end=$(date +%s%N)
+echo "ABCD,SystemDS,"$((($end - $start) / 1000000)) >>${root_path}/results/$log_file_name
+
