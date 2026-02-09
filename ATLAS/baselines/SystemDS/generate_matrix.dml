@@ -2,14 +2,14 @@
 
 out=$out
 
-A = rand(rows=8192, cols=1024, min=0, max=10000000)
-B = rand(rows=1024, cols=2048, min=0, max=10000000)
-C = rand(rows=2048, cols=1024, min=0, max=10000000)
-D = rand(rows=1024, cols=4096, min=0, max=10000000)
+A = rand(rows=8192, cols=1024, min=0, max=255)
+B = rand(rows=1024, cols=2048, min=0, max=255)
+C = rand(rows=2048, cols=1024, min=0, max=255)
+D = rand(rows=1024, cols=4096, min=0, max=255)
 
 
 # Write matrix to file
-write(A, out+"/A_matrix.csv", format="csv")
-write(B, out+"/B_matrix.csv", format="csv")
-write(C, out+"/C_matrix.csv", format="csv")
-write(D, out+"/D_matrix.csv", format="csv")
+write(A, out+"/A_matrix.csv", format="csv", singlefile="true")
+write(B, out+"/B_matrix.csv", format="csv", singlefile="true")
+write(C, out+"/C_matrix.csv", format="csv", singlefile="true")
+write(D, out+"/D_matrix.csv", format="csv", singlefile="true")

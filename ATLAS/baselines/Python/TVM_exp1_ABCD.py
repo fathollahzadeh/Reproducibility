@@ -39,9 +39,13 @@ if __name__ == "__main__":
 
     Y = te.compute((M, N), lambda i, j: te.sum(ABC[i, k3] * D[k3, j], axis=k3), name="Y")
 
+    # Schedule and parallelize
     s = te.create_schedule(Y.op)
-    func = tvm.build(s, [A, B, C, D, Y], target="llvm")
+    s[Y].parallel(s[Y].op.axis[0])
+    s[AB].parallel(s[AB].op.axis[0])
+    s[ABC].parallel(s[ABC].op.axis[0])
 
+    func = tvm.build(s, [A,B,C,D,Y], target="llvm -libs=openmp")
     dev = tvm.cpu()
 
     A_tvm = tvm.nd.array(A_np.astype("float32"), dev)

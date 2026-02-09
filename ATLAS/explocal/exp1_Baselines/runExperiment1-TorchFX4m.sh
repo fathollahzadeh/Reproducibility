@@ -1,4 +1,4 @@
-log_file_name=ABCD.dat
+iter=$1
 root_path="$(pwd)"
 data_path="${root_path}/data"
 matrix_data_path="${root_path}/data/matrix"
@@ -8,11 +8,13 @@ baseline_path="${path}/Baselines"
 cd "${baseline_path}/Python"
 source venv/bin/activate
 
-CMD="python PyTorchFX_exp1_ABCD.py ${matrix_data_path}"
+start=$(date +%s%N)
+python PyTorchFX_exp1_ABCD.py ${matrix_data_path}
+end=$(date +%s%N)
+echo "ABCD,PyTorchFX,"$((($end - $start) / 1000000)) >>${root_path}/results/ABCD_${itr}.dat
 
-$CMD
 
 start=$(date +%s%N)
-$CMD
+python PyTorchFX_exp1_ABCD_Read.py ${matrix_data_path}
 end=$(date +%s%N)
-echo "ABCD,PyTorchFX,"$((($end - $start) / 1000000)) >>${root_path}/results/$log_file_name
+echo "ABCD,PyTorchFX,"$((($end - $start) / 1000000)) >>${root_path}/results/ABCD_Read_${itr}.dat

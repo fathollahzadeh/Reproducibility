@@ -1,25 +1,19 @@
+source ./run0LoadConfig.sh
+
 root_path="$(pwd)"
 data_path="${root_path}/data"
-matrix_data_path="${root_path}/data/matrix"
+
 path="${root_path}/setup"
 baseline_path="${path}/Baselines"
 
 mkdir -p $data_path
-rm -rf $matrix_data_path
-mkdir -p $matrix_data_path
-
 dml_path="${baseline_path}/SystemDS/generate_matrix.dml"
 
-
 cd "${baseline_path}/SystemDS"
+matrix_data_path="${root_path}/data/matrix"
+mkdir -p $matrix_data_path
+$CMD -nvargs out=$matrix_data_path -config SystemDS-gen-config.xml -f generate_matrix.dml
 
-CMD="java -Xmx28g -Xms28g -Xmn2g --add-modules jdk.incubator.vector \
-    -cp SystemDS.jar:lib/* \
-    -Dlog4j.configuration=file:log4j-silent.properties \
-    org.apache.sysds.api.DMLScript \
-    -exec singlenode \
-    -debug \
-    -stats -nvargs out=$matrix_data_path
-    -config SystemDS-config.xml"
-
-$CMD -f generate_matrix.dml
+matrix_data_path="${root_path}/data/matrix_large"
+mkdir -p $matrix_data_path
+$CMD -nvargs out=$matrix_data_path -config SystemDS-gen-config.xml -f generate_matrix_large.dml
