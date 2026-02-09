@@ -1,33 +1,18 @@
 import numpy as np
 import pandas as pd
 import multiprocessing as mp
-import os
 import sys
-import torch
 
 # ------------------------------------------------------------
-# Automatic CPU detection
-# ------------------------------------------------------------
-
-CPU_COUNT = os.cpu_count()
-
-os.environ["OMP_NUM_THREADS"] = str(CPU_COUNT)
-os.environ["MKL_NUM_THREADS"] = str(CPU_COUNT)
-os.environ["OPENBLAS_NUM_THREADS"] = str(CPU_COUNT)
-
-torch.set_num_threads(CPU_COUNT)
-
-print("Detected CPUs:", CPU_COUNT)
-
-# ------------------------------------------------------------
-# Load matrices
+# Load matrices from CSV
 # ------------------------------------------------------------
 
 def load_matrix(path):
-    return pd.read_csv(path, header=None).values.astype(np.float32)
+    return pd.read_csv(path, header=None).values
+
 
 # ------------------------------------------------------------
-# ATLAS optimizer
+# ATLAS optimizer (cost-based contraction ordering)
 # ------------------------------------------------------------
 
 def matmul_flops(a_shape, b_shape):
@@ -35,8 +20,10 @@ def matmul_flops(a_shape, b_shape):
     _, n = b_shape
     return 2 * m * k * n
 
+
 def shape_after(a_shape, b_shape):
     return (a_shape[0], b_shape[1])
+
 
 def atlas_optimize(A, B, C, D):
     shapes = [A.shape, B.shape, C.shape, D.shape]
@@ -75,43 +62,39 @@ def atlas_optimize(A, B, C, D):
     best = min(results, key=results.get)
     return best, results
 
-# ------------------------------------------------------------
-# Backends
-# ------------------------------------------------------------
-
-def numpy_mm(A, B):
-    return A @ B
-
-def torch_mm(A, B):
-    A = torch.from_numpy(A)
-    B = torch.from_numpy(B)
-    return (A @ B).numpy()
 
 # ------------------------------------------------------------
-# EineDecom runtime
+# EineDecom-style parallel GEMM runtime
 # ------------------------------------------------------------
 
-def parallel_mm(A, B, backend="numpy"):
-    chunks = np.array_split(A, CPU_COUNT, axis=0)
+_B = None
 
-    if backend == "numpy":
-        func = numpy_mm
-    else:
-        func = torch_mm
+def _init_pool(B):
+    global _B
+    _B = B
 
-    with mp.Pool(CPU_COUNT) as pool:
-        parts = pool.starmap(func, [(c, B) for c in chunks])
+
+def _worker(A_chunk):
+    return A_chunk @ _B
+
+
+def parallel_matmul(A, B, nproc=8):
+    chunks = np.array_split(A, nproc, axis=0)
+
+    with mp.Pool(nproc, initializer=_init_pool, initargs=(B,)) as pool:
+        parts = pool.map(_worker, chunks)
 
     return np.vstack(parts)
 
+
 # ------------------------------------------------------------
-# Execute plan
+# Execute contraction plan
 # ------------------------------------------------------------
 
-def execute(A, B, C, D, order, backend="torch"):
+def execute(A, B, C, D, order, nproc=8):
 
     def mm(X, Y):
-        return parallel_mm(X, Y, backend)
+        return parallel_matmul(X, Y, nproc)
 
     if order == "((AB)C)D":
         return mm(mm(mm(A, B), C), D)
@@ -128,24 +111,32 @@ def execute(A, B, C, D, order, backend="torch"):
     elif order == "A(B(CD))":
         return mm(A, mm(B, mm(C, D)))
 
+    else:
+        raise ValueError("Unknown order")
+
+
 # ------------------------------------------------------------
 # Main
 # ------------------------------------------------------------
 
 if __name__ == "__main__":
     matrix_path = sys.argv[1]
-    mp.set_start_method("spawn", force=True)
+    number_threads = mp.cpu_count()
 
+    # Load matrices from CSV
     A = load_matrix(f"{matrix_path}/A_matrix.csv")
     B = load_matrix(f"{matrix_path}/B_matrix.csv")
     C = load_matrix(f"{matrix_path}/C_matrix.csv")
     D = load_matrix(f"{matrix_path}/D_matrix.csv")
 
+    best_order, costs = atlas_optimize(A, B, C, D)
 
-    best, costs = atlas_optimize(A, B, C, D)
+    # print("\nContraction FLOPs:")
+    # for k, v in costs.items():
+    #     print(f"{k}: {v:.2e}")
 
-    print("\nATLAS selected:", best)
+    # print("\nATLAS selected:", best_order)
 
-    Y = execute(A, B, C, D, best, backend="torch")
+    Y = execute(A, B, C, D, best_order, nproc=number_threads)
 
-    print("Output shape:", Y.shape)
+    # print("\nOutput shape:", Y.shape)
