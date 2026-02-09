@@ -1,0 +1,15 @@
+# Generate Matrix
+
+out=$out
+
+A = rand(rows=1000, cols=1000, min=0, max=10000000)
+B = rand(rows=1000, cols=1000, min=0, max=10000000)
+C = rand(rows=1000, cols=1000, min=0, max=10000000)
+D = rand(rows=1000, cols=1000, min=0, max=10000000)
+
+
+# Write matrix to file
+write(A, out+"/A_matrix.csv", format="csv")
+write(B, out+"/B_matrix.csv", format="csv")
+write(C, out+"/C_matrix.csv", format="csv")
+write(D, out+"/D_matrix.csv", format="csv")

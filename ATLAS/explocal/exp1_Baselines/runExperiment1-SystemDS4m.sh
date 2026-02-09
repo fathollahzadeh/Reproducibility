@@ -4,12 +4,8 @@ matrix_data_path="${root_path}/data/matrix"
 path="${root_path}/setup"
 baseline_path="${path}/Baselines"
 
-mkdir -p $data_path
-rm -rf $matrix_data_path
-mkdir -p $matrix_data_path
-
-dml_path="${baseline_path}/SystemDS/generate_matrix.dml"
-
+dml_path="${root_path}/baselines/SystemDS/exp1_ABCD.dml"
+out_path="${root_path}/results"
 
 cd "${baseline_path}/SystemDS"
 
@@ -19,7 +15,7 @@ CMD="java -Xmx28g -Xms28g -Xmn2g --add-modules jdk.incubator.vector \
     org.apache.sysds.api.DMLScript \
     -exec singlenode \
     -debug \
-    -stats -nvargs out=$matrix_data_path
+    -stats -nvargs out=$out_path matrix_path=$matrix_data_path
     -config SystemDS-config.xml"
 
-$CMD -f generate_matrix.dml
+$CMD -f $dml_path

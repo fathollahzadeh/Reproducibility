@@ -9,20 +9,34 @@ mkdir -p ${baseline_path}
 mkdir -p ${data_path}
 
 
-### Setup Baelines
+### Setup Python Baelines
 #******************
 pybaseline_path="${path}/Baselines/Python"
-rm -rf ${pybaseline_path}
+# rm -rf ${pybaseline_path}
 mkdir -p ${pybaseline_path}
 
 cd ${root_path}
-cd ..
 cp -r baselines/Python/* ${pybaseline_path}
 cd ${pybaseline_path}
 
-rm -rf venv 
-python3.10 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+# rm -rf venv 
+# python3.10 -m venv venv
+# source venv/bin/activate
+# pip install --upgrade pip
+# pip install -r requirements.txt
+
+
+# Setup Apache SystemDS
+# sysdsbaseline_path="${path}/Baselines/SystemDS"
+# rm -rf ${sysdsbaseline_path}
+# mkdir -p ${sysdsbaseline_path}
+# cd ${sysdsbaseline_path}
+
+# git clone git@github.com:apache/systemds.git
+# cd systemds
+# mvn clean package -P distribution
+
+# mv target/lib/ ${sysdsbaseline_path}
+# mv target/SystemDS.jar ${sysdsbaseline_path}
+
 
