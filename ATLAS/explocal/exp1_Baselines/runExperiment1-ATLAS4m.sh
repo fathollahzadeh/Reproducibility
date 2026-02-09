@@ -5,17 +5,17 @@ matrix_data_path="${root_path}/data/matrix"
 path="${root_path}/setup"
 baseline_path="${path}/Baselines"
 
-cd "${baseline_path}/Python"
+cd "${baseline_path}/ATLAS"
 source venv/bin/activate
 
 
 start=$(date +%s%N)
-python JAX_exp1_ABCD.py ${matrix_data_path}
+python main.py ${matrix_data_path}
 end=$(date +%s%N)
-echo "ABCD,JAX,"${itr}","$((($end - $start) / 1000000)) >>${root_path}/results/ABCD.dat
+echo "ATLAS,JAX,"${itr}","$((($end - $start) / 1000000)) >>${root_path}/results/ABCD.dat
 
 
 start=$(date +%s%N)
-python JAX_exp1_ABCD_Read.py ${matrix_data_path}
+python main_Read.py ${matrix_data_path}
 end=$(date +%s%N)
 echo "ABCD,JAX,"${itr}","$((($end - $start) / 1000000)) >>${root_path}/results/ABCD_Read.dat

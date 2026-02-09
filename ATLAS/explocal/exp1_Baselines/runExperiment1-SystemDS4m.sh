@@ -1,6 +1,6 @@
 source ./run0LoadConfig.sh
 
-iter=$1
+itr=$1
 root_path="$(pwd)"
 data_path="${root_path}/data"
 matrix_data_path="${root_path}/data/matrix"
@@ -25,11 +25,11 @@ cd "${baseline_path}/SystemDS"
 start=$(date +%s%N)
 $CMD -nvargs out=$out_path matrix_path=$matrix_data_path -config SystemDS-config.xml -f $dml_path
 end=$(date +%s%N)
-echo "ABCD,SystemDS,"$((($end - $start) / 1000000)) >>${root_path}/results/ABCD_${itr}.dat
+echo "ABCD,SystemDS,"${itr}","$((($end - $start) / 1000000)) >>${root_path}/results/ABCD.dat
 
 
 start=$(date +%s%N)
 $CMD -nvargs out=$out_path matrix_path=$matrix_data_path -config SystemDS-config.xml -f $dml_read_path
 end=$(date +%s%N)
-echo "ABCD,SystemDS,"$((($end - $start) / 1000000)) >>${root_path}/results/ABCD_Read_${itr}.dat
+echo "ABCD,SystemDS,"${itr}","$((($end - $start) / 1000000)) >>${root_path}/results/ABCD_Read.dat
 

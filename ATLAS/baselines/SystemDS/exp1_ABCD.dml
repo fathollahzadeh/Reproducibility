@@ -8,6 +8,4 @@ C = read($matrix_path+"/C_matrix.csv", data_type="matrix");
 D = read($matrix_path+"/D_matrix.csv", data_type="matrix");
 
 Y = A %*% B %*% C %*% D
-
-x = sum(Y);
-write(x, out+"/Y.csv");
+write(Y, out+"/Y.csv");
