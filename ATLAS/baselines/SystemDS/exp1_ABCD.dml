@@ -9,4 +9,5 @@ D = read($matrix_path+"/D_matrix.csv", data_type="matrix");
 
 Y = A %*% B %*% C %*% D
 
-write(Y, out+"/Y.csv", format="csv")
+x = sum(Y);
+write(x, out+"/Y.csv");

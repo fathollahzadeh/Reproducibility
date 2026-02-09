@@ -2,10 +2,10 @@
 
 out=$out
 
-A = rand(rows=1000, cols=1000, min=0, max=10000000)
-B = rand(rows=1000, cols=1000, min=0, max=10000000)
-C = rand(rows=1000, cols=1000, min=0, max=10000000)
-D = rand(rows=1000, cols=1000, min=0, max=10000000)
+A = rand(rows=8192, cols=1024, min=0, max=10000000)
+B = rand(rows=1024, cols=2048, min=0, max=10000000)
+C = rand(rows=2048, cols=1024, min=0, max=10000000)
+D = rand(rows=1024, cols=4096, min=0, max=10000000)
 
 
 # Write matrix to file
