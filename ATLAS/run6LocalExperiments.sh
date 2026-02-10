@@ -12,7 +12,7 @@ CMDJAXExp1=./explocal/exp1_Baselines/runExperiment1-JAX4m.sh
 CMDATLASExp1=./explocal/exp1_Baselines/runExperiment1-ATLAS4m.sh
 
 for itr in {1..3}; do
-    for s in {1000,4000,8000,16000,20000,24000,28000,32000}; do 
+    for s in 1000 4000 8000 16000 20000 24000 28000 32000; do 
         $CMDSystemDSExp1 $itr $s
         $CMDTorchFXExp1 $itr $s
         $CMDTVMExp1 $itr $s

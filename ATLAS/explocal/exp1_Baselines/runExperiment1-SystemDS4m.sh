@@ -1,4 +1,4 @@
-source ./run0LoadConfig.sh
+. ./run0LoadConfig.sh
 
 itr=$1
 s=$2
