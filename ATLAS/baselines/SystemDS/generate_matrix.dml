@@ -1,11 +1,13 @@
 # Generate Matrix
 
 out=$out
+s=$s
 
-A = rand(rows=8192, cols=1024, min=0, max=255)
-B = rand(rows=1024, cols=2048, min=0, max=255)
-C = rand(rows=2048, cols=1024, min=0, max=255)
-D = rand(rows=1024, cols=4096, min=0, max=255)
+A = rand(rows=s, cols=0.1*s, min=0, max=65536)
+B = rand(rows=0.1*s, cols=s, min=0, max=65536)
+C = rand(rows=s, cols=0.1*s, min=0, max=65536)
+D = rand(rows=0.1*s, cols=10*s, min=0, max=65536)
+E = rand(rows=10*s, cols=s, min=0, max=65536)
 
 
 # Write matrix to file
@@ -13,3 +15,4 @@ write(A, out+"/A_matrix.csv", format="csv", singlefile="true")
 write(B, out+"/B_matrix.csv", format="csv", singlefile="true")
 write(C, out+"/C_matrix.csv", format="csv", singlefile="true")
 write(D, out+"/D_matrix.csv", format="csv", singlefile="true")
+write(E, out+"/E_matrix.csv", format="csv", singlefile="true")

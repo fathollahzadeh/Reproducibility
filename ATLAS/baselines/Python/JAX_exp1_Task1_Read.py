@@ -15,3 +15,4 @@ if __name__ == "__main__":
     B_np = load_matrix(f"{matrix_path}/B_matrix.csv")
     C_np = load_matrix(f"{matrix_path}/C_matrix.csv")
     D_np = load_matrix(f"{matrix_path}/D_matrix.csv")
+    E_np = load_matrix(f"{matrix_path}/E_matrix.csv")

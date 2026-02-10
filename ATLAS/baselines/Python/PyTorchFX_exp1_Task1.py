@@ -7,8 +7,8 @@ def load_matrix(path):
     data = np.loadtxt(path, delimiter=",")
     return torch.tensor(data, dtype=torch.float32)
 
-def model(A, B, C, D):
-    return A @ B @ C @ D
+def model(A, B, C, D, E):
+    return (A @ B) + (C @ D @ E)
 
 
 if __name__ == "__main__":
@@ -19,13 +19,7 @@ if __name__ == "__main__":
     B = load_matrix(f"{matrix_path}/B_matrix.csv")
     C = load_matrix(f"{matrix_path}/C_matrix.csv")
     D = load_matrix(f"{matrix_path}/D_matrix.csv")
-
-
-    # Trace graph
-    # traced = fx.symbolic_trace(model)
-    # print(traced.graph)
+    E = load_matrix(f"{matrix_path}/E_matrix.csv")
 
     # Run computation
-    Y = model(A, B, C, D)
-    # print("Result:\n", Y)
-
+    Y = model(A, B, C, D, E)

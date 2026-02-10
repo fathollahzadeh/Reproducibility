@@ -1,4 +1,5 @@
 itr=$1
+s=$2
 root_path="$(pwd)"
 data_path="${root_path}/data"
 matrix_data_path="${root_path}/data/matrix"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # clean original results
-# rm -rf results/*;
+rm -rf results/*;
 mkdir -p results;
 
 
@@ -12,10 +12,11 @@ CMDJAXExp1=./explocal/exp1_Baselines/runExperiment1-JAX4m.sh
 CMDATLASExp1=./explocal/exp1_Baselines/runExperiment1-ATLAS4m.sh
 
 for itr in {1..3}; do
-    # $CMDSystemDSExp1 $itr
-    # $CMDTorchFXExp1 $itr
-    # $CMDTVMExp1 $itr
-    # $CMDJAXExp1 $itr
-    $CMDATLASExp1 $itr
-
+    for s in {1000,4000,8000,16000,20000,24000,28000,32000}; do 
+        $CMDSystemDSExp1 $itr $s
+        $CMDTorchFXExp1 $itr $s
+        $CMDTVMExp1 $itr $s
+        $CMDJAXExp1 $itr $s
+        # $CMDATLASExp1 $itr $s
+    done       
 done    

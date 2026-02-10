@@ -1,16 +1,10 @@
-import jax
-import jax.numpy as jnp
+import tvm
+from tvm import te
 import numpy as np
 import sys
 
 def load_matrix(path):
-    data = np.loadtxt(path, delimiter=",")
-    return data
-
-@jax.jit
-def compute(A, B, C, D):
-    return A @ B @ C @ D
-
+    return np.loadtxt(path, delimiter=",").astype("float32")
 
 if __name__ == "__main__":
     matrix_path = sys.argv[1]
@@ -20,12 +14,4 @@ if __name__ == "__main__":
     B_np = load_matrix(f"{matrix_path}/B_matrix.csv")
     C_np = load_matrix(f"{matrix_path}/C_matrix.csv")
     D_np = load_matrix(f"{matrix_path}/D_matrix.csv")
-
-
-    A = jnp.array(A_np)
-    B = jnp.array(B_np)
-    C = jnp.array(C_np)
-    D = jnp.array(D_np)
-
-    Y = compute(A, B, C, D)
-
+    E_np = load_matrix(f"{matrix_path}/E_matrix.csv")
