@@ -64,7 +64,7 @@
   minor grid style={gray!70},
   xticklabel style = {font=\small, xshift=0pt, yshift=3pt},
   legend image post style={line width=.3pt},          
-  bar width=6pt, % Reduced to fit two stacks
+  bar width=4pt, % Reduced to fit two stacks
   every x tick/.style={draw=none},
   ytick={100,1000,10000,100000,1000000,10000000},
   yticklabels={,1, 10,$10^2$,$10^3$, $10^4$}, 
@@ -82,6 +82,8 @@
 \myaddplotcost{task1}{JAX}{0}{color4};
 \resetstackedplots
 \myaddplotcost{task1}{TVM}{0}{black};
+\resetstackedplots
+\myaddplotcost{task1}{ATLAS}{0}{teal3};
 \end{axis}
 
 \node [draw=none,inner sep=0, font=\small, anchor=west] (l1) at (rel axis cs: 0.2,0.35) {
@@ -89,7 +91,8 @@
     \ref{SystemDS} SystemDS\\
     \ref{PyTorchFX} PyTorch FX\\
     \ref{JAX} JAX\\
-    \ref{TVM} TVM
+    \ref{TVM} TVM \\
+    \ref{ATLAS} ATLAS
   }
   };
 
