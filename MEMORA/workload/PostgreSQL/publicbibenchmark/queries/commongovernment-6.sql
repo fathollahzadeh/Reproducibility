@@ -1,0 +1,1 @@
+SELECT commongovernment13.naicscode AS naicscode,   commongovernment13.naicsname AS naicsname,   SUM(commongovernment13.obligatedamount) AS sumobligatedamountok FROM commongovernment13 GROUP BY commongovernment13.naicscode,   commongovernment13.naicsname;

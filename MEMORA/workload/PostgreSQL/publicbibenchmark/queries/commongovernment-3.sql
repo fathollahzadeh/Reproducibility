@@ -1,0 +1,1 @@
+SELECT commongovernment13.awardtype AS awardtype,   commongovernment13.level1category AS level1category,   SUM(commongovernment13.obligatedamount) AS sumobligatedamountok FROM commongovernment13 GROUP BY commongovernment13.awardtype,   commongovernment13.level1category;
