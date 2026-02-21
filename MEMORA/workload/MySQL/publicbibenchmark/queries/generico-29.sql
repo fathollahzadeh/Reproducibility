@@ -1,0 +1,1 @@
+SELECT CAST(EXTRACT(MONTH FROM generico4.fecha) AS SIGNED) AS mnfechaok FROM generico4 WHERE ((generico4.anunciante IN ('BANTRAB/TODOTICKET', 'TODOTICKET', 'TODOTICKET.COM')) AND (CAST(EXTRACT(YEAR FROM generico4.fecha) AS SIGNED) >= 2010) AND (CAST(EXTRACT(YEAR FROM generico4.fecha) AS SIGNED) <= 2015)) GROUP BY mnfechaok ORDER BY mnfechaok ASC ;

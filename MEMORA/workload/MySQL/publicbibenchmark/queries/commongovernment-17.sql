@@ -1,0 +1,1 @@
+SELECT commongovernment5.fundingagencyname AS fundingagencyname FROM commongovernment5 GROUP BY commongovernment5.fundingagencyname;

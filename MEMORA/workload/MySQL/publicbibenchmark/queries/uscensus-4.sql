@@ -1,0 +1,1 @@
+SELECT CAST(uscensus2.region AS SIGNED) AS region,   CAST(uscensus2.st AS SIGNED) AS stss13pusacsv,   COUNT(DISTINCT CAST(uscensus2.serialno AS CHAR)) AS tempcalculation36816930274551398913377970810,   SUM(CAST(uscensus2.number_of_records AS SIGNED)) AS tempcalculation36816930274551398939677625720 FROM uscensus2 GROUP BY uscensus2.region,   uscensus2.st,   region,   uscensus2.st;
