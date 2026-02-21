@@ -1,0 +1,52 @@
+select min(chn.name) AS character__name,
+       min(mi_idx.info) as rating,
+       min(n.name) as playing_actor,
+       min(t.title) as complete_hero_movie
+from complete_cast as cc,
+     comp_cast_type as cct1,
+     comp_cast_type as cct2,
+     char_name as chn,
+     cast_info as ci,
+     info_type as it2,
+     keyword as k,
+     kind_type as kt,
+     movie_info_idx as mi_idx,
+     movie_keyword as mk,
+     name as n,
+     title as t
+where cct1.kind = 'cast'
+  and cct2.kind like '%complete%'
+  and chn.name is not null
+  and (chn.name like '%man%'
+       or chn.name like '%man%')
+  and it2.info = 'rating'
+  and kt.kind = 'movie'
+  and mi_idx.info > '7.0'
+  and kt.id = t.kind_id
+  and t.id = mk.movie_id
+  and t.id = ci.movie_id
+  and t.id = cc.movie_id
+  and t.id = mi_idx.movie_id
+  and mk.movie_id = ci.movie_id
+  and mk.movie_id = cc.movie_id
+  and mk.movie_id = mi_idx.movie_id
+  and ci.movie_id = cc.movie_id
+  and ci.movie_id = mi_idx.movie_id
+  and cc.movie_id = mi_idx.movie_id
+  and chn.id = ci.person_role_id
+  and n.id = ci.person_id
+  and k.id = mk.keyword_id
+  and cct1.id = cc.subject_id
+  and cct2.id = cc.status_id
+  and it2.id = mi_idx.info_type_id
+  and k.keyword in ('based-on-comic',
+'tv-special',
+'violence',
+'violence',
+'superhero',
+'marvel-comics',
+'gore',
+'blood',
+'sequel',
+'sequel')
+and t.production_year > 1999;
