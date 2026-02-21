@@ -1,0 +1,1 @@
+SELECT commongovernment6.level2category AS level2categorycopy FROM commongovernment6 GROUP BY commongovernment6.level2category;

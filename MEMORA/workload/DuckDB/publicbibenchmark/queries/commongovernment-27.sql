@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT commongovernment13.refidvidpiid) AS ctdrefidvidpiidok,   commongovernment13.fundingagencyname AS fundingagencyname,   SUM(commongovernment13.obligatedamount) AS sumobligatedamountok FROM commongovernment13 GROUP BY commongovernment13.fundingagencyname;

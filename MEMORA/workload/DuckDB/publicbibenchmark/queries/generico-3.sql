@@ -1,0 +1,1 @@
+SELECT generico5.anunciante AS anunciante FROM generico5 WHERE ((generico5.anunciante IN ('BANTRAB/TODOTICKET', 'TODOTICKET', 'TODOTICKET.COM')) AND (CAST(EXTRACT(YEAR FROM generico5.fecha) AS BIGINT) >= 2010) AND (CAST(EXTRACT(YEAR FROM generico5.fecha) AS BIGINT) <= 2015)) GROUP BY generico5.anunciante ORDER BY anunciante ASC ;

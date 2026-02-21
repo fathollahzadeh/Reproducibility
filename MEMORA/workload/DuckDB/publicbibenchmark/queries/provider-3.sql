@@ -1,0 +1,1 @@
+SELECT provider3.nppesproviderstreet1 AS nppesproviderstreet1 FROM provider3 WHERE ((provider3.nppesproviderstate = 'WA') AND (provider3.providertype = 'Nephrology')) GROUP BY provider3.nppesproviderstreet1;

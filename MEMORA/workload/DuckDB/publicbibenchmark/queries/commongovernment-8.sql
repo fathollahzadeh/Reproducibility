@@ -1,0 +1,1 @@
+SELECT commongovernment13.prodorservcode AS prodorservcode,   commongovernment13.prodorservcodedesc AS prodorservcodedesc,   SUM(commongovernment13.obligatedamount) AS sumobligatedamountok FROM commongovernment13 GROUP BY commongovernment13.prodorservcode,   commongovernment13.prodorservcodedesc;

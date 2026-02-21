@@ -1,0 +1,1 @@
+SELECT SUM(commongovernment12.obligatedamount) AS sumobligatedamountok,   commongovernment12.vendcontoffbussizedeterm AS vendcontoffbussizedeterm FROM commongovernment12 GROUP BY commongovernment12.vendcontoffbussizedeterm;

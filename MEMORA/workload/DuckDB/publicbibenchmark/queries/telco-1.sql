@@ -1,0 +1,1 @@
+SELECT telco1.packagename AS packagename,   SUM(telco1.revenuesmsp1) AS sumrevenuesmsp1ok,   CAST(EXTRACT(YEAR FROM telco1.rchrgamtexpdate) AS BIGINT) AS yrrchrgamtexpdateok FROM telco1 GROUP BY telco1.packagename,   yrrchrgamtexpdateok;
