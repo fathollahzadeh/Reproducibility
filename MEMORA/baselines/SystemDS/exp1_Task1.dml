@@ -1,0 +1,12 @@
+# Generate Matrix
+
+out=$out
+
+A = read($matrix_path+"/A_matrix.csv", data_type="matrix");
+B = read($matrix_path+"/B_matrix.csv", data_type="matrix");
+C = read($matrix_path+"/C_matrix.csv", data_type="matrix");
+D = read($matrix_path+"/D_matrix.csv", data_type="matrix");
+E = read($matrix_path+"/E_matrix.csv", data_type="matrix");
+
+Y = A %*% B + C %*% D %*% E
+write(Y, out+"/Y.csv");

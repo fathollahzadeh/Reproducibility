@@ -1,0 +1,103 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(1000, 0.1) (4000, 0.1) (8000, 0.1) (16000, 0.1)};
+}
+\makeatother
+
+\begin{tikzpicture}
+
+\newcommand{\myaddplotcost}[4]{ % #5 for experiment_id
+    \addplot[xshift=#3,fill=#4, draw=black, line width=0.3pt] 
+    table[y=time, col sep=comma, x=s,discard if singlconfig={#1}{#2}] %, discard if singlconfig={#2}
+    {../final-results/task1.csv};
+    \label{#2}     
+}
+
+\pgfplotsset{
+    discard if singlconfig/.style n args={2}{
+        x filter/.code={
+            \edef\tempa{\thisrow{task}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+              \edef\tempc{\thisrow{baseline}}
+              \edef\tempd{#2}
+              \ifx\tempc\tempd                  
+              \else
+                \def\pgfmathresult{inf}
+                \message{Discarding row: \tempa, \tempc (llm_model mismatch)^^J}
+              \fi
+            \else
+              \def\pgfmathresult{inf}
+              \message{Discarding row: \tempa (dataset_name mismatch)^^J}
+            \fi			
+        }
+    },
+}
+\sffamily
+\begin{axis}[
+  ymin=100,
+  ybar,
+  ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={gray, line width=0.3pt},
+  enlarge y limits={0.2,upper},
+  enlarge x limits=0.2, % Increased to accommodate side-by-side bars
+  ylabel={Execution Time [s]},
+  xlabel={Scale},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\small},
+  xticklabel style = {font=\small},
+  ylabel style = {font=\small, yshift=0pt, xshift=-3pt},
+  xlabel style = {font=\small, yshift=1pt, xshift=0pt},
+  height=0.6\columnwidth,
+  width=1\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  xticklabel style = {font=\small, xshift=0pt, yshift=3pt},
+  legend image post style={line width=.3pt},          
+  bar width=4pt, % Reduced to fit two stacks
+  every x tick/.style={draw=none},
+  ytick={100,1000,10000,100000,1000000,10000000},
+  yticklabels={,1, 10,$10^2$,$10^3$, $10^4$}, 
+  xtick = data,
+  symbolic x coords={1000,4000,8000,16000},
+  xticklabels={1k,4k,8k,16k},
+  legend image code/.code={\draw [#1] (0cm,-0.11cm) rectangle (0.2cm,0.11cm); line width=3pt}, 
+]
+
+\resetstackedplots
+\myaddplotcost{task1}{SystemDS}{0}{tug};
+\resetstackedplots
+\myaddplotcost{task1}{PyTorchFX}{0}{tugb};
+\resetstackedplots
+\myaddplotcost{task1}{JAX}{0}{color4};
+\resetstackedplots
+\myaddplotcost{task1}{TVM}{0}{black};
+\resetstackedplots
+\myaddplotcost{task1}{ATLAS}{0}{teal3};
+\end{axis}
+
+\node [draw=none,inner sep=0, font=\small, anchor=west] (l1) at (rel axis cs: 0.2,0.35) {
+  \shortstack[l]{  
+    \ref{SystemDS} SystemDS\\
+    \ref{PyTorchFX} PyTorch FX\\
+    \ref{JAX} JAX\\
+    \ref{TVM} TVM \\
+    \ref{ATLAS} ATLAS
+  }
+  };
+
+% \node [draw=none,inner sep=0, font=\footnotesize, anchor=west, right=of l1, xshift=-20pt] (l2){\shortstack[l]{  
+%   \ref{gpt-oss-120b_validation_time} Validation (OSS-120B) \\ 
+%   \ref{gpt-oss-120b_top1_time} Top-1 (OSS-120B)}};  
+
+\end{tikzpicture}
