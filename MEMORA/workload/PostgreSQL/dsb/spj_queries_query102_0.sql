@@ -23,7 +23,7 @@ where
     and ws_item_sk = ss_item_sk
     and ss_sold_date_sk = d1.d_date_sk
     and ws_sold_date_sk = d2.d_date_sk
-    and d2.d_date between d1.d_date and (d1.d_date + interval '30 day')
+    and d2.d_date between d1.d_date and (d1.d_date + interval '30' day)
     and ss_customer_sk = c_customer_sk
     and ws_bill_customer_sk = c_customer_sk
     and ws_warehouse_sk = inv_warehouse_sk

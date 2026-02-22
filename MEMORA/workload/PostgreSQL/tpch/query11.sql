@@ -1,6 +1,6 @@
 select
         ps_partkey,
-        sum(ps_supplycost * ps_availqty) as value
+        sum(ps_supplycost * ps_availqty) as value1
 from
         partsupp,
         supplier,
@@ -24,4 +24,4 @@ group by
                                 and n_name = 'GERMANY'
                 )
 order by
-        value desc;
+        value1 desc;

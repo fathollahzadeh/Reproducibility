@@ -22,7 +22,7 @@ AND i_item_sk = ss_item_sk
 AND i_category IN ('Books', 'Shoes', 'Sports')
 AND sr_returned_date_sk = d1.d_date_sk
 AND ws_sold_date_sk = d2.d_date_sk
-AND d2.d_date between d1.d_date AND (d1.d_date + interval '90 day')
+AND d2.d_date between d1.d_date AND (d1.d_date + interval '90' day)
 AND ca_state in ('IN', 'MT', 'NM', 'OH', 'OR')
 AND d1.d_year = 1999
 AND hd_income_band_sk BETWEEN 14 AND 20

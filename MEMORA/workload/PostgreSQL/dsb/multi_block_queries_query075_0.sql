@@ -53,7 +53,7 @@ WITH all_sales AS (
        and wr_reason_sk in (7, 10, 12, 29, 45)) sales_detail
 GROUP BY d_year, i_brand_id, i_class_id, i_category_id, i_manufact_id)
  SELECT  prev_yr.d_year AS prev_year
-                          ,curr_yr.d_year AS year
+                          ,curr_yr.d_year AS year1
                           ,curr_yr.i_brand_id
                           ,curr_yr.i_class_id
                           ,curr_yr.i_category_id

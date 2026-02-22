@@ -27,7 +27,7 @@ and sr_returned_date_sk   = d2.d_date_sk
 and ss_customer_sk = sr_customer_sk
 and ss_store_sk = s_store_sk
 and sr_store_sk = s_store_sk
-and d1.d_date between (d2.d_date - interval '120 day')
+and d1.d_date between (d2.d_date - interval '120' day)
                and d2.d_date
 and d1.d_dow = 2
 and s_state in ('GA','IL','OH')

@@ -1,0 +1,428 @@
+[
+    {
+        "table": "hits",
+        "rows": 99997497,
+        "columns": [
+            {
+                "name": "httperror",
+                "type": "smallint"
+            },
+            {
+                "name": "javaenable",
+                "type": "smallint"
+            },
+            {
+                "name": "isevent",
+                "type": "smallint"
+            },
+            {
+                "name": "isparameter",
+                "type": "smallint"
+            },
+            {
+                "name": "dontcounthits",
+                "type": "smallint"
+            },
+            {
+                "name": "withhash",
+                "type": "smallint"
+            },
+            {
+                "name": "localeventtime",
+                "type": "timestamp without time zone"
+            },
+            {
+                "name": "age",
+                "type": "smallint"
+            },
+            {
+                "name": "sex",
+                "type": "smallint"
+            },
+            {
+                "name": "income",
+                "type": "smallint"
+            },
+            {
+                "name": "interests",
+                "type": "smallint"
+            },
+            {
+                "name": "robotness",
+                "type": "smallint"
+            },
+            {
+                "name": "remoteip",
+                "type": "integer"
+            },
+            {
+                "name": "windowname",
+                "type": "integer"
+            },
+            {
+                "name": "openername",
+                "type": "integer"
+            },
+            {
+                "name": "historylength",
+                "type": "smallint"
+            },
+            {
+                "name": "watchid",
+                "type": "bigint"
+            },
+            {
+                "name": "sendtiming",
+                "type": "integer"
+            },
+            {
+                "name": "dnstiming",
+                "type": "integer"
+            },
+            {
+                "name": "connecttiming",
+                "type": "integer"
+            },
+            {
+                "name": "responsestarttiming",
+                "type": "integer"
+            },
+            {
+                "name": "responseendtiming",
+                "type": "integer"
+            },
+            {
+                "name": "fetchtiming",
+                "type": "integer"
+            },
+            {
+                "name": "socialsourcenetworkid",
+                "type": "smallint"
+            },
+            {
+                "name": "paramprice",
+                "type": "bigint"
+            },
+            {
+                "name": "paramcurrencyid",
+                "type": "smallint"
+            },
+            {
+                "name": "hasgclid",
+                "type": "smallint"
+            },
+            {
+                "name": "refererhash",
+                "type": "bigint"
+            },
+            {
+                "name": "urlhash",
+                "type": "bigint"
+            },
+            {
+                "name": "clid",
+                "type": "integer"
+            },
+            {
+                "name": "goodevent",
+                "type": "smallint"
+            },
+            {
+                "name": "eventtime",
+                "type": "timestamp without time zone"
+            },
+            {
+                "name": "eventdate",
+                "type": "date"
+            },
+            {
+                "name": "counterid",
+                "type": "integer"
+            },
+            {
+                "name": "clientip",
+                "type": "integer"
+            },
+            {
+                "name": "regionid",
+                "type": "integer"
+            },
+            {
+                "name": "userid",
+                "type": "bigint"
+            },
+            {
+                "name": "counterclass",
+                "type": "smallint"
+            },
+            {
+                "name": "os",
+                "type": "smallint"
+            },
+            {
+                "name": "useragent",
+                "type": "smallint"
+            },
+            {
+                "name": "isrefresh",
+                "type": "smallint"
+            },
+            {
+                "name": "referercategoryid",
+                "type": "smallint"
+            },
+            {
+                "name": "refererregionid",
+                "type": "integer"
+            },
+            {
+                "name": "urlcategoryid",
+                "type": "smallint"
+            },
+            {
+                "name": "urlregionid",
+                "type": "integer"
+            },
+            {
+                "name": "resolutionwidth",
+                "type": "smallint"
+            },
+            {
+                "name": "resolutionheight",
+                "type": "smallint"
+            },
+            {
+                "name": "resolutiondepth",
+                "type": "smallint"
+            },
+            {
+                "name": "flashmajor",
+                "type": "smallint"
+            },
+            {
+                "name": "flashminor",
+                "type": "smallint"
+            },
+            {
+                "name": "netmajor",
+                "type": "smallint"
+            },
+            {
+                "name": "netminor",
+                "type": "smallint"
+            },
+            {
+                "name": "useragentmajor",
+                "type": "smallint"
+            },
+            {
+                "name": "cookieenable",
+                "type": "smallint"
+            },
+            {
+                "name": "javascriptenable",
+                "type": "smallint"
+            },
+            {
+                "name": "ismobile",
+                "type": "smallint"
+            },
+            {
+                "name": "mobilephone",
+                "type": "smallint"
+            },
+            {
+                "name": "ipnetworkid",
+                "type": "integer"
+            },
+            {
+                "name": "traficsourceid",
+                "type": "smallint"
+            },
+            {
+                "name": "searchengineid",
+                "type": "smallint"
+            },
+            {
+                "name": "advengineid",
+                "type": "smallint"
+            },
+            {
+                "name": "isartifical",
+                "type": "smallint"
+            },
+            {
+                "name": "windowclientwidth",
+                "type": "smallint"
+            },
+            {
+                "name": "windowclientheight",
+                "type": "smallint"
+            },
+            {
+                "name": "clienttimezone",
+                "type": "smallint"
+            },
+            {
+                "name": "clienteventtime",
+                "type": "timestamp without time zone"
+            },
+            {
+                "name": "silverlightversion1",
+                "type": "smallint"
+            },
+            {
+                "name": "silverlightversion2",
+                "type": "smallint"
+            },
+            {
+                "name": "silverlightversion3",
+                "type": "integer"
+            },
+            {
+                "name": "silverlightversion4",
+                "type": "smallint"
+            },
+            {
+                "name": "codeversion",
+                "type": "integer"
+            },
+            {
+                "name": "islink",
+                "type": "smallint"
+            },
+            {
+                "name": "isdownload",
+                "type": "smallint"
+            },
+            {
+                "name": "isnotbounce",
+                "type": "smallint"
+            },
+            {
+                "name": "funiqid",
+                "type": "bigint"
+            },
+            {
+                "name": "hid",
+                "type": "integer"
+            },
+            {
+                "name": "isoldcounter",
+                "type": "smallint"
+            },
+            {
+                "name": "title",
+                "type": "text"
+            },
+            {
+                "name": "paramcurrency",
+                "type": "text"
+            },
+            {
+                "name": "fromtag",
+                "type": "text"
+            },
+            {
+                "name": "browserlanguage",
+                "type": "text"
+            },
+            {
+                "name": "originalurl",
+                "type": "text"
+            },
+            {
+                "name": "mobilephonemodel",
+                "type": "text"
+            },
+            {
+                "name": "params",
+                "type": "text"
+            },
+            {
+                "name": "browsercountry",
+                "type": "text"
+            },
+            {
+                "name": "socialnetwork",
+                "type": "text"
+            },
+            {
+                "name": "socialaction",
+                "type": "text"
+            },
+            {
+                "name": "searchphrase",
+                "type": "text"
+            },
+            {
+                "name": "url",
+                "type": "text"
+            },
+            {
+                "name": "referer",
+                "type": "text"
+            },
+            {
+                "name": "openstatservicename",
+                "type": "text"
+            },
+            {
+                "name": "openstatcampaignid",
+                "type": "text"
+            },
+            {
+                "name": "openstatadid",
+                "type": "text"
+            },
+            {
+                "name": "hitcolor",
+                "type": "character"
+            },
+            {
+                "name": "openstatsourceid",
+                "type": "text"
+            },
+            {
+                "name": "utmsource",
+                "type": "text"
+            },
+            {
+                "name": "utmmedium",
+                "type": "text"
+            },
+            {
+                "name": "utmcampaign",
+                "type": "text"
+            },
+            {
+                "name": "utmcontent",
+                "type": "text"
+            },
+            {
+                "name": "socialsourcepage",
+                "type": "text"
+            },
+            {
+                "name": "flashminor2",
+                "type": "text"
+            },
+            {
+                "name": "pagecharset",
+                "type": "text"
+            },
+            {
+                "name": "utmterm",
+                "type": "text"
+            },
+            {
+                "name": "paramorderid",
+                "type": "text"
+            },
+            {
+                "name": "useragentminor",
+                "type": "character varying"
+            }
+        ]
+    }
+]

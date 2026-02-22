@@ -10,14 +10,14 @@ select
   ,s_county
   ,s_state
   ,s_zip
-  ,sum(case when (sr_returned_date_sk - ss_sold_date_sk <= 30 ) then 1 else 0 end)  as "30 days"
+  ,sum(case when (sr_returned_date_sk - ss_sold_date_sk <= 30 ) then 1 else 0 end)  as days_30
   ,sum(case when (sr_returned_date_sk - ss_sold_date_sk > 30) and
-                 (sr_returned_date_sk - ss_sold_date_sk <= 60) then 1 else 0 end )  as "31-60 days"
+                 (sr_returned_date_sk - ss_sold_date_sk <= 60) then 1 else 0 end )  as days_31_60 
   ,sum(case when (sr_returned_date_sk - ss_sold_date_sk > 60) and
-                 (sr_returned_date_sk - ss_sold_date_sk <= 90) then 1 else 0 end)  as "61-90 days"
+                 (sr_returned_date_sk - ss_sold_date_sk <= 90) then 1 else 0 end)  as days_61_90
   ,sum(case when (sr_returned_date_sk - ss_sold_date_sk > 90) and
-                 (sr_returned_date_sk - ss_sold_date_sk <= 120) then 1 else 0 end)  as "91-120 days"
-  ,sum(case when (sr_returned_date_sk - ss_sold_date_sk  > 120) then 1 else 0 end)  as ">120 days"
+                 (sr_returned_date_sk - ss_sold_date_sk <= 120) then 1 else 0 end)  as days_91_120 
+  ,sum(case when (sr_returned_date_sk - ss_sold_date_sk  > 120) then 1 else 0 end)  as days_g120 
 from
    store_sales
   ,store_returns
@@ -33,7 +33,7 @@ and ss_sold_date_sk   = d1.d_date_sk
 and sr_returned_date_sk   = d2.d_date_sk
 and ss_customer_sk = sr_customer_sk
 and ss_store_sk = s_store_sk
-and d1.d_date between (d2.d_date - interval '120 day')
+and d1.d_date between (d2.d_date - interval '120' day)
                and d2.d_date
 group by
    s_store_name

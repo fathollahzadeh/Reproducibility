@@ -1,5 +1,5 @@
 
-select  sum(cs_ext_discount_amt)  as "excess discount amount"
+select  sum(cs_ext_discount_amt)  as excess_discount_amount
 from
    catalog_sales
    ,item
@@ -9,7 +9,7 @@ where
 or i_manager_id BETWEEN 28 and 57)
 and i_item_sk = cs_item_sk
 and d_date between '1999-01-14' and
-        cast('1999-01-14' as date) + interval '90 day'
+        cast('1999-01-14' as date) + interval '90' day
 and d_date_sk = cs_sold_date_sk
 and cs_ext_discount_amt
      > (
@@ -21,7 +21,7 @@ and cs_ext_discount_amt
          where
               cs_item_sk = i_item_sk
           and d_date between '1999-01-14' and
-                             cast('1999-01-14' as date) + interval '90 day'
+                             cast('1999-01-14' as date) + interval '90' day
           and d_date_sk = cs_sold_date_sk
           and cs_list_price between 236 and 265
           and cs_sales_price / cs_list_price BETWEEN 45 * 0.01 AND 65 * 0.01

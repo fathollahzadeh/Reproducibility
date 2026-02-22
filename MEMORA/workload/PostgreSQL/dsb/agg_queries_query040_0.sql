@@ -17,8 +17,8 @@ select
  i_item_sk          = cs_item_sk
  and cs_warehouse_sk    = w_warehouse_sk
  and cs_sold_date_sk    = d_date_sk
- and d_date between  (cast ('1998-04-26' as date) - interval '30 day')
-                and (cast ('1998-04-26' as date) + interval '30 day') 
+ and d_date between  (cast ('1998-04-26' as date) - interval '30' day)
+                and (cast ('1998-04-26' as date) + interval '30' day) 
  and i_category  = 'Home'
  and i_manager_id between 28 and 67
  and cs_wholesale_cost between 69 and 88
