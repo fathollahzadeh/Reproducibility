@@ -5,4 +5,4 @@
 # ./run2SetupBaseLines.sh;
 # ./run3DownloadData.sh;
 # ./run4GenerateData.sh;
-./run6LocalExperiments.sh;
+./run4LocalExperiments.sh;

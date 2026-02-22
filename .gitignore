@@ -17,3 +17,4 @@ ATLAS/data/matrix/X_matrix.csv.mtd
 ATLAS/results/*
 MEMORA/setup/Baselines/MEMORA/*
 MEMORA/setup/Baselines/MEMORA/*/*
+MEMORA/results/*
