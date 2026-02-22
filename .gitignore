@@ -18,3 +18,5 @@ ATLAS/results/*
 MEMORA/setup/Baselines/MEMORA/*
 MEMORA/setup/Baselines/MEMORA/*/*
 MEMORA/results/*
+MEMORA/Calcite-Results/PostgreSQL/*
+MEMORA/Calcite-Results/PostgreSQL/*/*

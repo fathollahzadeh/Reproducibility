@@ -16,10 +16,10 @@ baseline_path="${path}/Baselines"
 
 mkdir -p ${root_path}/Calcite-Results
 mkdir -p ${root_path}/Calcite-Results/${dbms}
-mkdir -p ${root_path}/Calcite-Results/${dbms}/${dataset_name}
-mkdir -p ${root_path}/Calcite-Results/${dbms}/${dataset_name}/Logical-MEMOS
-mkdir -p ${root_path}/Calcite-Results/${dbms}/${dataset_name}/Physical-MEMOS
-memora_results="${root_path}/Calcite-Results/${dbms}/${dataset_name}"
+mkdir -p ${root_path}/Calcite-Results/${dbms}/${dataset_name}-${best_plan}-${enable_logical_rules}-${enable_physical_rules}
+mkdir -p ${root_path}/Calcite-Results/${dbms}/${dataset_name}-${best_plan}-${enable_logical_rules}-${enable_physical_rules}/Logical-MEMOS
+mkdir -p ${root_path}/Calcite-Results/${dbms}/${dataset_name}-${best_plan}-${enable_logical_rules}-${enable_physical_rules}/Physical-MEMOS
+memora_results="${root_path}/Calcite-Results/${dbms}/${dataset_name}-${best_plan}-${enable_logical_rules}-${enable_physical_rules}"
 
 workload_schema_path="${root_path}/catalog/${dataset_name}/schema.json"
 workload_path="${root_path}/workload/${dbms}/${dataset_name}"
@@ -55,4 +55,4 @@ SCRIPT="${CMD} -Dworkload_schema_path=${workload_schema_path} \
 start=$(date +%s%N)
 $SCRIPT 
 end=$(date +%s%N)
-echo "Calcite,"${itr}","${best_plan}","${enable_logical_rules}","${enable_physical_rules}","$((($end - $start) / 1000000)) >>${log_fname}
+echo "Calcite,"${dataset_name}","${itr}","${best_plan}","${enable_logical_rules}","${enable_physical_rules}","$((($end - $start) / 1000000)) >>${log_fname}
