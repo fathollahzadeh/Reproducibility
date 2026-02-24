@@ -17,7 +17,7 @@ WHERE
     )
     AND EXISTS (
         SELECT
-            1 AS one
+            1 AS one1
         FROM
             (
                 SELECT

@@ -1,0 +1,61 @@
+
+WITH RankedPosts AS (
+    SELECT 
+        P.Id AS PostId,
+        P.Title,
+        P.Score,
+        P.ViewCount,
+        P.CreationDate,
+        U.DisplayName AS OwnerDisplayName,
+        COUNT(CASE WHEN C.Id IS NOT NULL THEN 1 END) AS CommentCount,
+        ROW_NUMBER() OVER (PARTITION BY P.PostTypeId ORDER BY P.Score DESC) AS Rank
+    FROM 
+        Posts P
+    LEFT JOIN 
+        Users U ON P.OwnerUserId = U.Id
+    LEFT JOIN 
+        Comments C ON P.Id = C.PostId
+    WHERE 
+        P.CreationDate >= TIMESTAMP '2024-10-01 12:34:56' - INTERVAL '30 days'
+    GROUP BY 
+        P.Id, P.Title, P.Score, P.ViewCount, P.CreationDate, U.DisplayName
+),
+TopPosts AS (
+    SELECT 
+        PostId,
+        Title,
+        Score,
+        ViewCount,
+        CreationDate,
+        OwnerDisplayName
+    FROM 
+        RankedPosts
+    WHERE 
+        Rank <= 5
+),
+PostWithVoteStats AS (
+    SELECT 
+        TP.*,
+        COALESCE(SUM(CASE WHEN V.VoteTypeId = 2 THEN 1 ELSE 0 END), 0) AS TotalUpVotes,
+        COALESCE(SUM(CASE WHEN V.VoteTypeId = 3 THEN 1 ELSE 0 END), 0) AS TotalDownVotes
+    FROM 
+        TopPosts TP
+    LEFT JOIN 
+        Votes V ON TP.PostId = V.PostId
+    GROUP BY 
+        TP.PostId, TP.Title, TP.Score, TP.ViewCount, TP.CreationDate, TP.OwnerDisplayName
+)
+SELECT 
+    PWS.PostId,
+    PWS.Title,
+    PWS.Score,
+    PWS.ViewCount,
+    PWS.CreationDate,
+    PWS.OwnerDisplayName,
+    PWS.TotalUpVotes,
+    PWS.TotalDownVotes,
+    (PWS.TotalUpVotes - PWS.TotalDownVotes) AS NetVotes
+FROM 
+    PostWithVoteStats PWS
+ORDER BY 
+    PWS.Score DESC, PWS.ViewCount DESC;

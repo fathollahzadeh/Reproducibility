@@ -30,12 +30,17 @@ physical_memos_merged="${memora_results}/Physical-Merged.csv"
 physical_memos_count="${memora_results}/Physical-Count.csv"
 physical_memos="${memora_results}/Physical-MEMOS"
 
+
 cd "${baseline_path}/MEMORA"
 
 physical_params=""
 
 if [[ "$best_plan" == "true" ]]; then
     physical_params="-Dphysical_memos_merged=${physical_memos_merged} -Dphysical_memos_count=${physical_memos_count} -Dphysical_memos=${physical_memos}"
+fi
+
+if [ $dataset_name == "publicbibenchmark" ]; then
+    workload_path="${workload_path}/queries"
 fi
 
 SCRIPT="${CMD} -Dworkload_schema_path=${workload_schema_path} \

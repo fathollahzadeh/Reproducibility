@@ -16,7 +16,7 @@ FROM
     realestate26
 WHERE
     (
-        (realestate26.street ILIKE 'THE BISHOPS AVENUE') 
+        (realestate26.street LIKE 'THE BISHOPS AVENUE') 
         AND (realestate26.county = 'GREATER LONDON')
         AND (
             realestate26.dateoftransfer >= cast('1996-01-01' as DATE)

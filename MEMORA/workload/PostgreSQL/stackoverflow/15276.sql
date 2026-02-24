@@ -1,0 +1,27 @@
+SELECT 
+    P.Id AS PostId,
+    P.Title,
+    U.DisplayName AS OwnerDisplayName,
+    P.CreationDate,
+    P.Score,
+    P.ViewCount,
+    COALESCE(C.CommentCount, 0) AS CommentCount,
+    COALESCE(A.AnswerCount, 0) AS AnswerCount
+FROM 
+    Posts P
+JOIN 
+    Users U ON P.OwnerUserId = U.Id
+LEFT JOIN 
+    (SELECT PostId, COUNT(*) AS CommentCount 
+     FROM Comments 
+     GROUP BY PostId) C ON P.Id = C.PostId
+LEFT JOIN 
+    (SELECT ParentId, COUNT(*) AS AnswerCount 
+     FROM Posts 
+     WHERE PostTypeId = 2 
+     GROUP BY ParentId) A ON P.Id = A.ParentId
+WHERE 
+    P.PostTypeId = 1 
+ORDER BY 
+    P.CreationDate DESC
+LIMIT 10;
