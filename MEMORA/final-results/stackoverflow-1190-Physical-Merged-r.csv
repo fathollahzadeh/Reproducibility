@@ -1,0 +1,28 @@
+op;count
+Limit L:(Sort(Project(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)))));17
+Sort L:(Project(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments))));17
+Project L:(HashJoin(TableScan(posttypes),TableScan(posts)));39
+Aggregate L:(Project(HashJoin(TableScan(posttypes),TableScan(posts))));39
+TableScan:posttypes;39
+Project L:(Aggregate(Project(HashJoin(TableScan(posttypes),TableScan(posts)))));39
+HashJoin L:(TableScan(posttypes)) R:(TableScan(posts));39
+Sort L:(Project(Aggregate(Project(HashJoin(TableScan(posttypes),TableScan(posts))))));39
+Limit L:(Sort(Aggregate(Project(HashJoin(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)),TableScan(votes))))));211
+TableScan:votes;211
+HashJoin L:(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments))) R:(TableScan(votes));211
+Sort L:(Aggregate(Project(HashJoin(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)),TableScan(votes)))));211
+Aggregate L:(Project(HashJoin(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)),TableScan(votes))));211
+Project L:(HashJoin(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)),TableScan(votes)));211
+Sort L:(Aggregate(Project(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)))));431
+Limit L:(Sort(Aggregate(Project(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments))))));431
+Aggregate L:(Project(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments))));431
+Project L:(HashJoin(HashJoin(Filter(TableScan(posts)),TableScan(users)),TableScan(comments)));448
+Sort L:(Project(HashJoin(Filter(TableScan(posts)),TableScan(users))));492
+Project L:(HashJoin(Filter(TableScan(posts)),TableScan(users)));492
+Limit L:(Sort(Project(HashJoin(Filter(TableScan(posts)),TableScan(users)))));492
+HashJoin L:(HashJoin(Filter(TableScan(posts)),TableScan(users))) R:(TableScan(comments));659
+TableScan:comments;659
+Filter L:(TableScan(posts));1151
+TableScan:users;1151
+HashJoin L:(Filter(TableScan(posts))) R:(TableScan(users));1151
+TableScan:posts;1190

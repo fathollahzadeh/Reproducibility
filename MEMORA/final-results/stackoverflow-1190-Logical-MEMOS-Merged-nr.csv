@@ -1,0 +1,23 @@
+op;count
+Sort L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]];17
+Project L:[Join[TableScan[posts]@TableScan[posttypes]]];39
+TableScan:posttypes;39
+Sort L:[Aggregate[Project[Join[TableScan[posts]@TableScan[posttypes]]]]];39
+Join:inner L:[TableScan[posts]] R:[TableScan[posttypes]];39
+Aggregate L:[Project[Join[TableScan[posts]@TableScan[posttypes]]]];39
+Aggregate L:[Project[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]]];211
+Join:left L:[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]] R:[TableScan[votes]];211
+TableScan:votes;211
+Project L:[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]];211
+Sort L:[Aggregate[Project[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]]]];211
+Sort L:[Aggregate[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]]];431
+Aggregate L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]];431
+Project L:[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]];448
+Project L:[Join[Filter[TableScan[posts]]@TableScan[users]]];492
+Sort L:[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]];492
+TableScan:comments;659
+Join:left L:[Join[Filter[TableScan[posts]]@TableScan[users]]] R:[TableScan[comments]];659
+Join:inner L:[Filter[TableScan[posts]]] R:[TableScan[users]];1151
+Filter L:[TableScan[posts]];1151
+TableScan:users;1151
+TableScan:posts;1190

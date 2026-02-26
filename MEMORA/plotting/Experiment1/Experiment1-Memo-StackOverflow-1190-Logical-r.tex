@@ -1,0 +1,82 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(Sort L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]], 0.1) (TableScan:posttypes, 0.1) (Join:inner L:[TableScan[posts]] R:[TableScan[posttypes]], 0.1) (Project L:[TableScan[posts]], 0.1) (Join:inner L:[Project[TableScan[posts]]] R:[TableScan[posttypes]], 0.1) (Sort L:[Aggregate[Project[Join[TableScan[posts]@TableScan[posttypes]]]]], 0.1) (Join:inner L:[TableScan[posttypes]] R:[TableScan[posts]], 0.1) (Project L:[Aggregate[Project[Join[TableScan[posts]@TableScan[posttypes]]]]], 0.1) (Join:inner L:[TableScan[posttypes]] R:[Project[TableScan[posts]]], 0.1) (Project L:[Join[TableScan[posts]@TableScan[posttypes]]], 0.1) (Project L:[Join[Project[TableScan[posts]]@TableScan[posttypes]]], 0.1) (Project L:[Join[TableScan[posttypes]@TableScan[posts]]], 0.1) (Project L:[Join[TableScan[posttypes]@Project[TableScan[posts]]]], 0.1) (Aggregate L:[Project[Join[TableScan[posts]@TableScan[posttypes]]]], 0.1) (Join:left L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]] R:[Project[TableScan[votes]]], 0.1) (Project L:[Join[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]@Project[TableScan[votes]]]], 0.1) (TableScan:votes, 0.1) (Project L:[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]], 0.1) (Join:left L:[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]] R:[TableScan[votes]], 0.1) (Project L:[TableScan[votes]], 0.1) (Aggregate L:[Project[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]]], 0.1) (Sort L:[Aggregate[Project[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]]]], 0.1) (Aggregate L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]], 0.1) (Join:left L:[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]] R:[Project[TableScan[comments]]], 0.1) (Join:left L:[Join[Filter[TableScan[posts]]@TableScan[users]]] R:[TableScan[comments]], 0.1) (TableScan:comments, 0.1) (Project L:[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]], 0.1) (Project L:[TableScan[comments]], 0.1) (Project L:[Join[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]@Project[TableScan[comments]]]], 0.1) (Sort L:[Aggregate[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]]], 0.1) (Sort L:[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]], 0.1) (Filter L:[TableScan[posts]], 0.1) (Project L:[TableScan[users]], 0.1) (TableScan:users, 0.1) (Join:inner L:[Project[Filter[TableScan[posts]]]] R:[Project[TableScan[users]]], 0.1) (Join:inner L:[TableScan[users]] R:[Filter[TableScan[posts]]], 0.1) (Project L:[Filter[TableScan[posts]]], 0.1) (Join:inner L:[Filter[TableScan[posts]]] R:[TableScan[users]], 0.1) (Join:inner L:[Project[TableScan[users]]] R:[Project[Filter[TableScan[posts]]]], 0.1) (TableScan:posts, 0.1) (Project L:[Join[Filter[TableScan[posts]]@TableScan[users]]], 0.1) (Project L:[Join[TableScan[users]@Filter[TableScan[posts]]]], 0.1) (Project L:[Join[Project[Filter[TableScan[posts]]]@Project[TableScan[users]]]], 0.1) (Project L:[Join[Project[TableScan[users]]@Project[Filter[TableScan[posts]]]]], 0.1)};
+}
+\makeatother
+
+\begin{tikzpicture}
+
+\newcommand{\myaddplotcost}[4]{ % #5 for experiment_id
+    \addplot[xshift=#3,fill=#4, draw=black, line width=0.3pt] 
+    table[y=count, col sep=semicolon, x=op] %, discard if singlconfig={#2}
+    {../final-results/stackoverflow-1190-Logical-MEMOS-Merged-r.csv};
+    \label{#2}     
+}
+
+\pgfplotsset{
+    discard if singlconfig/.style n args={2}{
+        x filter/.code={
+            \edef\tempa{\thisrow{dataset_name}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+              \edef\tempc{\thisrow{baseline}}
+              \edef\tempd{#2}
+              \ifx\tempc\tempd                  
+              \else
+                \def\pgfmathresult{inf}
+                \message{Discarding row: \tempa, \tempc (llm_model mismatch)^^J}
+              \fi
+            \else
+              \def\pgfmathresult{inf}
+              \message{Discarding row: \tempa (dataset_name mismatch)^^J}
+            \fi			
+        }
+    },
+}
+\sffamily
+\begin{axis}[
+  ymin=0.1,
+  ybar,
+  %ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={gray, line width=0.3pt},
+  enlarge y limits={0.2,upper},
+  enlarge x limits=0.02, % Increased to accommodate side-by-side bars
+  ylabel={Frequency},
+  xlabel={},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\small},
+  xticklabel style = {font=\small},
+  ylabel style = {font=\small, yshift=0pt, xshift=-3pt},
+  xlabel style = {font=\small, yshift=1pt, xshift=0pt},
+  height=0.7\columnwidth,
+  width=2\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  xticklabel style = {font=\small, xshift=0pt, yshift=3pt, rotate=90},
+  legend image post style={line width=.3pt},          
+  bar width=8pt, % Reduced to fit two stacks
+  every x tick/.style={draw=none},
+  %ytick={1,10,100,1000,10000,100000},
+  %yticklabels={,10,$10^2$,$10^3$, $10^4$,$10^5$}, 
+  xtick = data,
+  symbolic x coords={Sort L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]],TableScan:posttypes,Join:inner L:[TableScan[posts]] R:[TableScan[posttypes]],Project L:[TableScan[posts]],Join:inner L:[Project[TableScan[posts]]] R:[TableScan[posttypes]],Sort L:[Aggregate[Project[Join[TableScan[posts]@TableScan[posttypes]]]]],Join:inner L:[TableScan[posttypes]] R:[TableScan[posts]],Project L:[Aggregate[Project[Join[TableScan[posts]@TableScan[posttypes]]]]],Join:inner L:[TableScan[posttypes]] R:[Project[TableScan[posts]]],Project L:[Join[TableScan[posts]@TableScan[posttypes]]],Project L:[Join[Project[TableScan[posts]]@TableScan[posttypes]]],Project L:[Join[TableScan[posttypes]@TableScan[posts]]],Project L:[Join[TableScan[posttypes]@Project[TableScan[posts]]]],Aggregate L:[Project[Join[TableScan[posts]@TableScan[posttypes]]]],Join:left L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]] R:[Project[TableScan[votes]]],Project L:[Join[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]@Project[TableScan[votes]]]],TableScan:votes,Project L:[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]],Join:left L:[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]] R:[TableScan[votes]],Project L:[TableScan[votes]],Aggregate L:[Project[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]]],Sort L:[Aggregate[Project[Join[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]@TableScan[votes]]]]],Aggregate L:[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]],Join:left L:[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]] R:[Project[TableScan[comments]]],Join:left L:[Join[Filter[TableScan[posts]]@TableScan[users]]] R:[TableScan[comments]],TableScan:comments,Project L:[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]],Project L:[TableScan[comments]],Project L:[Join[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]@Project[TableScan[comments]]]],Sort L:[Aggregate[Project[Join[Join[Filter[TableScan[posts]]@TableScan[users]]@TableScan[comments]]]]],Sort L:[Project[Join[Filter[TableScan[posts]]@TableScan[users]]]],Filter L:[TableScan[posts]],Project L:[TableScan[users]],TableScan:users,Join:inner L:[Project[Filter[TableScan[posts]]]] R:[Project[TableScan[users]]],Join:inner L:[TableScan[users]] R:[Filter[TableScan[posts]]],Project L:[Filter[TableScan[posts]]],Join:inner L:[Filter[TableScan[posts]]] R:[TableScan[users]],Join:inner L:[Project[TableScan[users]]] R:[Project[Filter[TableScan[posts]]]],TableScan:posts,Project L:[Join[Filter[TableScan[posts]]@TableScan[users]]],Project L:[Join[TableScan[users]@Filter[TableScan[posts]]]],Project L:[Join[Project[Filter[TableScan[posts]]]@Project[TableScan[users]]]],Project L:[Join[Project[TableScan[users]]@Project[Filter[TableScan[posts]]]]]},
+  % xticklabels={},
+  legend image code/.code={\draw [#1] (0cm,-0.11cm) rectangle (0.2cm,0.11cm); line width=3pt}, 
+]
+
+\resetstackedplots
+\myaddplotcost{tpch}{sql}{0}{black};
+
+\end{axis}
+
+\end{tikzpicture}

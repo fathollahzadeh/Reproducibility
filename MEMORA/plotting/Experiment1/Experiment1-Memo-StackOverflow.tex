@@ -1,0 +1,87 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(sql, 0) (logical_memo_nr, 0) (logical_memo_r, 0) (physical_memo, 0)};
+}
+\makeatother
+
+\begin{tikzpicture}
+
+\newcommand{\myaddplotcost}[4]{ % #5 for experiment_id
+    \addplot[xshift=#3,fill=#4, draw=black, line width=0.3pt] 
+    table[y=count, col sep=comma, x=baseline,discard if singlconfig={#1}{#2}] %, discard if singlconfig={#2}
+    {../final-results/memo.dat};
+    \label{#2}     
+}
+
+\pgfplotsset{
+    discard if singlconfig/.style n args={2}{
+        x filter/.code={
+            \edef\tempa{\thisrow{dataset_name}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+              \edef\tempc{\thisrow{baseline}}
+              \edef\tempd{#2}
+              \ifx\tempc\tempd                  
+              \else
+                \def\pgfmathresult{inf}
+                \message{Discarding row: \tempa, \tempc (llm_model mismatch)^^J}
+              \fi
+            \else
+              \def\pgfmathresult{inf}
+              \message{Discarding row: \tempa (dataset_name mismatch)^^J}
+            \fi			
+        }
+    },
+}
+\sffamily
+\begin{axis}[
+  ymin=0,
+  ybar,
+  %ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={gray, line width=0.3pt},
+  enlarge y limits={0.2,upper},
+  enlarge x limits=0.2, % Increased to accommodate side-by-side bars
+  ylabel={Count},
+  xlabel={},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\small},
+  xticklabel style = {font=\small},
+  ylabel style = {font=\small, yshift=0pt, xshift=-3pt},
+  xlabel style = {font=\small, yshift=1pt, xshift=0pt},
+  height=0.5\columnwidth,
+  width=0.4\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  xticklabel style = {font=\small, xshift=0pt, yshift=3pt},
+  legend image post style={line width=.3pt},          
+  bar width=8pt, % Reduced to fit two stacks
+  every x tick/.style={draw=none},
+  ytick={0,5000,10000,15000,20000,25000},
+  yticklabels={0,5k,10k,15k,20k,25k}, 
+  xtick = data,
+  symbolic x coords={sql,logical_memo_nr,logical_memo_r,physical_memo},
+  xticklabels={},
+  legend image code/.code={\draw [#1] (0cm,-0.11cm) rectangle (0.2cm,0.11cm); line width=3pt}, 
+]
+
+\resetstackedplots
+\myaddplotcost{stackoverflow}{sql}{18}{tug};
+\resetstackedplots
+\myaddplotcost{stackoverflow}{logical_memo_nr}{6}{tugb};
+\resetstackedplots
+\myaddplotcost{stackoverflow}{logical_memo_r}{-6}{color4};
+% \resetstackedplots
+% \myaddplotcost{stackoverflow}{physical_memo}{-18}{black};
+\end{axis}
+
+\end{tikzpicture}
