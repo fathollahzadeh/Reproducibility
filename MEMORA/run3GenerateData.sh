@@ -1,18 +1,34 @@
-. ./run0LoadConfig.sh
+#!/bin/bash
 
 root_path="$(pwd)"
 data_path="${root_path}/data"
 
-path="${root_path}/setup"
-baseline_path="${path}/Baselines"
+mkdir -p ${data_path}
+gdb_path="${root_path}/setup/Baselines/GDB"
+gendb_path="${root_path}/setup/Baselines/GenerateData"
 
-mkdir -p $data_path
-dml_path="${baseline_path}/SystemDS/generate_matrix.dml"
+#rm -rf "${data_path}/imdb" # clean-up
+# rm -rf "${data_path}/tpcds" # clean-up
+# rm -rf "${data_path}/dsb" # clean-up
+rm -rf "${data_path}/tpch" # clean-up
+# rm -rf "${data_path}/ssb" # clean-up
 
-cd "${baseline_path}/SystemDS"
+# ## TPC-DS Scale=100
+#********************
+# cd ${gdb_path}
+# cd TPC-DS-v3.2
+# ./runAll.sh 1 "${data_path}/tpcds" "/tmp/" 1
 
-for s in 1000 4000 8000 16000 20000 24000 28000 32000 ; do 
-    matrix_data_path="${root_path}/data/matrix_${s}"
-    mkdir -p $matrix_data_path
-    $CMD -nvargs out=$matrix_data_path s=$s -config SystemDS-gen-config.xml -f generate_matrix.dml
-done    
+# ## TPC-H Scale=100
+#*******************
+cd ${gdb_path}
+cd TPC-H
+./runAll.sh 1 "${data_path}/tpch" "/tmp/"
+
+# ## DSB Scale=10
+#*******************
+# cd ${gdb_path}
+# cd DSB
+# ./runAll.sh 1 "${data_path}/dsb" "/tmp/"
+
+

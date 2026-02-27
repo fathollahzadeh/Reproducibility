@@ -4,6 +4,7 @@ root_path="$(pwd)"
 data_path="${root_path}/data"
 path="${root_path}/setup"
 baseline_path="${path}/Baselines"
+pg_config="${path}/PGConfigs/PG-12-32-20.conf"
 
 mkdir -p ${path}
 mkdir -p ${baseline_path}
@@ -27,6 +28,20 @@ psql -U postgres -c "\i ${pg_config}"
 
 ./initpgSQL.sh
 sleep 3
+
+# # ## Install TPC-DS Database Generator
+# ####**********************************
+# cd "${baseline_path}/GDB/TPC-DS-v3.2"
+# ./run1Compile.sh
+
+# # ## Install TPC-H Dataset Generator
+# ####**********************************
+cd "${baseline_path}/GDB/TPC-H"
+./run1Compile.sh
+
+# ## Install DSB Dataset Generator
+# cd "${baseline_path}/GDB/DSB"
+# ./run1Compile.sh
 
 # Setup MEMORA
 memora_path="${path}/Baselines/MEMORA"
