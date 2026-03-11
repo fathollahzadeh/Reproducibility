@@ -1,0 +1,47 @@
+{
+    "columns": [
+        {
+            "name": "o_orderkey",
+            "type": "integer"
+        },
+        {
+            "name": "o_custkey",
+            "type": "integer"
+        },
+        {
+            "name": "o_totalprice",
+            "type": "numeric"
+        },
+        {
+            "name": "o_orderdate",
+            "type": "date"
+        },
+        {
+            "name": "o_shippriority",
+            "type": "integer"
+        },
+        {
+            "name": "o_orderpriority",
+            "type": "character"
+        },
+        {
+            "name": "o_orderstatus",
+            "type": "character"
+        },
+        {
+            "name": "o_clerk",
+            "type": "character"
+        },
+        {
+            "name": "o_comment",
+            "type": "character varying"
+        }
+    ],
+    "indexes": [
+        "o_orderkey",
+        "o_custkey",
+        "o_orderdate"
+    ],
+    "rows": 1500000,
+    "table": "orders"
+}

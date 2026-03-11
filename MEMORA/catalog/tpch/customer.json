@@ -1,0 +1,42 @@
+{
+    "columns": [
+        {
+            "name": "c_acctbal",
+            "type": "numeric"
+        },
+        {
+            "name": "c_nationkey",
+            "type": "integer"
+        },
+        {
+            "name": "c_custkey",
+            "type": "integer"
+        },
+        {
+            "name": "c_phone",
+            "type": "character"
+        },
+        {
+            "name": "c_mktsegment",
+            "type": "character"
+        },
+        {
+            "name": "c_comment",
+            "type": "character varying"
+        },
+        {
+            "name": "c_name",
+            "type": "character varying"
+        },
+        {
+            "name": "c_address",
+            "type": "character varying"
+        }
+    ],
+    "indexes": [
+        "c_custkey",
+        "c_nationkey"
+    ],
+    "rows": 150000,
+    "table": "customer"
+}

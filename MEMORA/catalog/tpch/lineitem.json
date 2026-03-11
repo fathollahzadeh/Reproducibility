@@ -1,0 +1,75 @@
+{
+    "columns": [
+        {
+            "name": "l_commitdate",
+            "type": "date"
+        },
+        {
+            "name": "l_receiptdate",
+            "type": "date"
+        },
+        {
+            "name": "l_linenumber",
+            "type": "integer"
+        },
+        {
+            "name": "l_quantity",
+            "type": "numeric"
+        },
+        {
+            "name": "l_orderkey",
+            "type": "integer"
+        },
+        {
+            "name": "l_extendedprice",
+            "type": "numeric"
+        },
+        {
+            "name": "l_discount",
+            "type": "numeric"
+        },
+        {
+            "name": "l_tax",
+            "type": "numeric"
+        },
+        {
+            "name": "l_partkey",
+            "type": "integer"
+        },
+        {
+            "name": "l_suppkey",
+            "type": "integer"
+        },
+        {
+            "name": "l_shipdate",
+            "type": "date"
+        },
+        {
+            "name": "l_comment",
+            "type": "character varying"
+        },
+        {
+            "name": "l_returnflag",
+            "type": "character"
+        },
+        {
+            "name": "l_linestatus",
+            "type": "character"
+        },
+        {
+            "name": "l_shipinstruct",
+            "type": "character"
+        },
+        {
+            "name": "l_shipmode",
+            "type": "character"
+        }
+    ],
+    "indexes": [
+        "l_orderkey",
+        "l_partkey, l_suppkey",
+        "l_shipdate, l_discount, l_quantity"
+    ],
+    "rows": 6001215,
+    "table": "lineitem"
+}

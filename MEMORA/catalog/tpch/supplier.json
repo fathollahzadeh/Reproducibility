@@ -1,0 +1,38 @@
+{
+    "columns": [
+        {
+            "name": "s_nationkey",
+            "type": "integer"
+        },
+        {
+            "name": "s_suppkey",
+            "type": "integer"
+        },
+        {
+            "name": "s_acctbal",
+            "type": "numeric"
+        },
+        {
+            "name": "s_comment",
+            "type": "character varying"
+        },
+        {
+            "name": "s_phone",
+            "type": "character"
+        },
+        {
+            "name": "s_name",
+            "type": "character"
+        },
+        {
+            "name": "s_address",
+            "type": "character varying"
+        }
+    ],
+    "indexes": [
+        "s_suppkey",
+        "s_nationkey"
+    ],
+    "rows": 10000,
+    "table": "supplier"
+}

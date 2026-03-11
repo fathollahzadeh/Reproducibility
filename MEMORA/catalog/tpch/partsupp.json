@@ -1,0 +1,31 @@
+{
+    "columns": [
+        {
+            "name": "ps_partkey",
+            "type": "integer"
+        },
+        {
+            "name": "ps_suppkey",
+            "type": "integer"
+        },
+        {
+            "name": "ps_availqty",
+            "type": "integer"
+        },
+        {
+            "name": "ps_supplycost",
+            "type": "numeric"
+        },
+        {
+            "name": "ps_comment",
+            "type": "character varying"
+        }
+    ],
+    "indexes": [
+        "ps_partkey",
+        "ps_partkey",
+        "ps_suppkey"
+    ],
+    "rows": 0,
+    "table": "partsupp"
+}

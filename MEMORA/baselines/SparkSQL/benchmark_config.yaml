@@ -1,0 +1,9 @@
+spark:
+  app_name: "DB_Workload_Benchmark"
+  master: "local[32]"
+  configs:
+    spark.driver.memory: "10g"
+    spark.driver.maxResultSize: "1g"
+    spark.sql.shuffle.partitions: "256"
+    spark.local.dir: "/tmp/spark-spill"
+    spark.sql.broadcastTimeout: "3600"

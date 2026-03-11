@@ -1,0 +1,26 @@
+{
+    "columns": [
+        {
+            "name": "n_nationkey",
+            "type": "integer"
+        },
+        {
+            "name": "n_regionkey",
+            "type": "integer"
+        },
+        {
+            "name": "n_name",
+            "type": "character"
+        },
+        {
+            "name": "n_comment",
+            "type": "character varying"
+        }
+    ],
+    "indexes": [
+        "n_nationkey",
+        "n_regionkey"
+    ],
+    "rows": 25,
+    "table": "nation"
+}

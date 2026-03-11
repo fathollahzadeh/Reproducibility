@@ -36,3 +36,7 @@ MEMORA/setup/Baselines/PostgreSQL-v18.3/*/*/*/*
 MEMORA/setup/Baselines/PostgreSQL-v18.3/*/*/*/*
 MEMORA/setup/Baselines/PostgreSQL-v18.3/*/*/*/*/*
 MEMORA/data/tpch/*
+MEMORA/data/tpch-parquet/*
+MEMORA/setup/Baselines/SparkSQL/*
+MEMORA/setup/Baselines/SparkSQL/*/*
+MEMORA/setup/Baselines/SparkSQL/*/*/*

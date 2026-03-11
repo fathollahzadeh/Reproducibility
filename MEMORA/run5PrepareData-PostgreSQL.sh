@@ -90,21 +90,21 @@ publicbi_data="${root_path}/data/PublicBIbenchmark"
 
 ### Load TPC-H Dataset into PostgreSQL
 #**************************************
-cd ${tpch_data}
-psql -U postgres -c "DROP DATABASE IF EXISTS tpch;"
-psql -U postgres -c "CREATE DATABASE tpch ENCODING 'UTF8';"
-psql -U postgres -d tpch -c "\i ${workload_path}/tpch/schema.sql;"
+# cd ${tpch_data}
+# psql -U postgres -c "DROP DATABASE IF EXISTS tpch;"
+# psql -U postgres -c "CREATE DATABASE tpch ENCODING 'UTF8';"
+# psql -U postgres -d tpch -c "\i ${workload_path}/tpch/schema.sql;"
 
-for i in `ls *.tbl`; do
-   table=${i/.tbl/}
-   echo "Loading $table..."
-   psql -U postgres -d tpch -c  "\copy ${table} from ${i} CSV DELIMITER '|'"
- done
+# for i in `ls *.tbl`; do
+#    table=${i/.tbl/}
+#    echo "Loading $table..."
+#    psql -U postgres -d tpch -c  "\copy ${table} from ${i} CSV DELIMITER '|'"
+#  done
 
- psql -U postgres -d tpch -c "\i ${workload_path}/tpch/index.sql;"
- psql -U postgres -d tpch -c "\i ${workload_path}/tpch/add_FK.sql;"
+#  psql -U postgres -d tpch -c "\i ${workload_path}/tpch/index.sql;"
+#  psql -U postgres -d tpch -c "\i ${workload_path}/tpch/add_FK.sql;"
 
- echo '-------------------<< TPC-H database (PostgreSQL) is ready >>-------------------'
+#  echo '-------------------<< TPC-H database (PostgreSQL) is ready >>-------------------'
 
 # ## Load PublicBIbenchmark Dataset into PostgreSQL
 # ***********************************

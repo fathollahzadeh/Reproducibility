@@ -1,10 +1,12 @@
 [
     {
-        "table": "nation",
-        "rows": 25,
         "columns": [
             {
                 "name": "n_nationkey",
+                "type": "integer"
+            },
+            {
+                "name": "n_regionkey",
                 "type": "integer"
             },
             {
@@ -12,18 +14,18 @@
                 "type": "character"
             },
             {
-                "name": "n_regionkey",
-                "type": "integer"
-            },
-            {
                 "name": "n_comment",
                 "type": "character varying"
             }
-        ]
+        ],
+        "indexes": [
+            "n_nationkey",
+            "n_regionkey"
+        ],
+        "rows": 25,
+        "table": "nation"
     },
     {
-        "table": "region",
-        "rows": 5,
         "columns": [
             {
                 "name": "r_regionkey",
@@ -37,31 +39,22 @@
                 "name": "r_comment",
                 "type": "character varying"
             }
-        ]
+        ],
+        "indexes": [
+            "r_regionkey"
+        ],
+        "rows": 5,
+        "table": "region"
     },
     {
-        "table": "supplier",
-        "rows": 10000,
         "columns": [
-            {
-                "name": "s_suppkey",
-                "type": "integer"
-            },
-            {
-                "name": "s_name",
-                "type": "character"
-            },
-            {
-                "name": "s_address",
-                "type": "character varying"
-            },
             {
                 "name": "s_nationkey",
                 "type": "integer"
             },
             {
-                "name": "s_phone",
-                "type": "character"
+                "name": "s_suppkey",
+                "type": "integer"
             },
             {
                 "name": "s_acctbal",
@@ -70,36 +63,44 @@
             {
                 "name": "s_comment",
                 "type": "character varying"
+            },
+            {
+                "name": "s_phone",
+                "type": "character"
+            },
+            {
+                "name": "s_name",
+                "type": "character"
+            },
+            {
+                "name": "s_address",
+                "type": "character varying"
             }
-        ]
+        ],
+        "indexes": [
+            "s_suppkey",
+            "s_nationkey"
+        ],
+        "rows": 10000,
+        "table": "supplier"
     },
     {
-        "table": "customer",
-        "rows": 150000,
         "columns": [
             {
-                "name": "c_custkey",
-                "type": "integer"
-            },
-            {
-                "name": "c_name",
-                "type": "character varying"
-            },
-            {
-                "name": "c_address",
-                "type": "character varying"
+                "name": "c_acctbal",
+                "type": "numeric"
             },
             {
                 "name": "c_nationkey",
                 "type": "integer"
             },
             {
-                "name": "c_phone",
-                "type": "character"
+                "name": "c_custkey",
+                "type": "integer"
             },
             {
-                "name": "c_acctbal",
-                "type": "numeric"
+                "name": "c_phone",
+                "type": "character"
             },
             {
                 "name": "c_mktsegment",
@@ -108,24 +109,36 @@
             {
                 "name": "c_comment",
                 "type": "character varying"
-            }
-        ]
-    },
-    {
-        "table": "part",
-        "rows": 200000,
-        "columns": [
-            {
-                "name": "p_partkey",
-                "type": "integer"
             },
             {
-                "name": "p_name",
+                "name": "c_name",
                 "type": "character varying"
             },
             {
-                "name": "p_mfgr",
-                "type": "character"
+                "name": "c_address",
+                "type": "character varying"
+            }
+        ],
+        "indexes": [
+            "c_custkey",
+            "c_nationkey"
+        ],
+        "rows": 150000,
+        "table": "customer"
+    },
+    {
+        "columns": [
+            {
+                "name": "p_size",
+                "type": "integer"
+            },
+            {
+                "name": "p_retailprice",
+                "type": "numeric"
+            },
+            {
+                "name": "p_partkey",
+                "type": "integer"
             },
             {
                 "name": "p_brand",
@@ -136,26 +149,29 @@
                 "type": "character varying"
             },
             {
-                "name": "p_size",
-                "type": "integer"
-            },
-            {
                 "name": "p_container",
                 "type": "character"
             },
             {
-                "name": "p_retailprice",
-                "type": "numeric"
-            },
-            {
                 "name": "p_comment",
                 "type": "character varying"
+            },
+            {
+                "name": "p_name",
+                "type": "character varying"
+            },
+            {
+                "name": "p_mfgr",
+                "type": "character"
             }
-        ]
+        ],
+        "indexes": [
+            "p_partkey"
+        ],
+        "rows": 200000,
+        "table": "part"
     },
     {
-        "table": "partsupp",
-        "rows": 0,
         "columns": [
             {
                 "name": "ps_partkey",
@@ -177,11 +193,16 @@
                 "name": "ps_comment",
                 "type": "character varying"
             }
-        ]
+        ],
+        "indexes": [
+            "ps_partkey",
+            "ps_partkey",
+            "ps_suppkey"
+        ],
+        "rows": 0,
+        "table": "partsupp"
     },
     {
-        "table": "orders",
-        "rows": 1500000,
         "columns": [
             {
                 "name": "o_orderkey",
@@ -192,10 +213,6 @@
                 "type": "integer"
             },
             {
-                "name": "o_orderstatus",
-                "type": "character"
-            },
-            {
                 "name": "o_totalprice",
                 "type": "numeric"
             },
@@ -204,7 +221,15 @@
                 "type": "date"
             },
             {
+                "name": "o_shippriority",
+                "type": "integer"
+            },
+            {
                 "name": "o_orderpriority",
+                "type": "character"
+            },
+            {
+                "name": "o_orderstatus",
                 "type": "character"
             },
             {
@@ -212,30 +237,27 @@
                 "type": "character"
             },
             {
-                "name": "o_shippriority",
-                "type": "integer"
-            },
-            {
                 "name": "o_comment",
                 "type": "character varying"
             }
-        ]
+        ],
+        "indexes": [
+            "o_orderkey",
+            "o_custkey",
+            "o_orderdate"
+        ],
+        "rows": 1500000,
+        "table": "orders"
     },
     {
-        "table": "lineitem",
-        "rows": 6001215,
         "columns": [
             {
-                "name": "l_orderkey",
-                "type": "integer"
+                "name": "l_commitdate",
+                "type": "date"
             },
             {
-                "name": "l_partkey",
-                "type": "integer"
-            },
-            {
-                "name": "l_suppkey",
-                "type": "integer"
+                "name": "l_receiptdate",
+                "type": "date"
             },
             {
                 "name": "l_linenumber",
@@ -244,6 +266,10 @@
             {
                 "name": "l_quantity",
                 "type": "numeric"
+            },
+            {
+                "name": "l_orderkey",
+                "type": "integer"
             },
             {
                 "name": "l_extendedprice",
@@ -258,6 +284,22 @@
                 "type": "numeric"
             },
             {
+                "name": "l_partkey",
+                "type": "integer"
+            },
+            {
+                "name": "l_suppkey",
+                "type": "integer"
+            },
+            {
+                "name": "l_shipdate",
+                "type": "date"
+            },
+            {
+                "name": "l_comment",
+                "type": "character varying"
+            },
+            {
                 "name": "l_returnflag",
                 "type": "character"
             },
@@ -266,29 +308,20 @@
                 "type": "character"
             },
             {
-                "name": "l_shipdate",
-                "type": "date"
-            },
-            {
-                "name": "l_commitdate",
-                "type": "date"
-            },
-            {
-                "name": "l_receiptdate",
-                "type": "date"
-            },
-            {
                 "name": "l_shipinstruct",
                 "type": "character"
             },
             {
                 "name": "l_shipmode",
                 "type": "character"
-            },
-            {
-                "name": "l_comment",
-                "type": "character varying"
             }
-        ]
+        ],
+        "indexes": [
+            "l_orderkey",
+            "l_partkey, l_suppkey",
+            "l_shipdate, l_discount, l_quantity"
+        ],
+        "rows": 6001215,
+        "table": "lineitem"
     }
 ]

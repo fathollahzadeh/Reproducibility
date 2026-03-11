@@ -9,25 +9,25 @@ pg_config="${path}/PGConfigs/PG-12-32-20.conf"
 mkdir -p ${path}
 mkdir -p ${baseline_path}
 
-cd ${baseline_path}
-rm -rf GDB
+# cd ${baseline_path}
+# rm -rf GDB
 
-git clone https://github.com/fathollahzadeh/GDB.git
-cd GDB
+# git clone https://github.com/fathollahzadeh/GDB.git
+# cd GDB
 
-## Install PostgreSQL 18.3
-***************************
-cd Install-Postgres-v18.3
-./setup.sh ${baseline_path} "${data_path}"
-cd ${root_path}
-./initpgSQL.sh
+# ## Install PostgreSQL 18.3
+# ***************************
+# cd Install-Postgres-v18.3
+# ./setup.sh ${baseline_path} "${data_path}"
+# cd ${root_path}
+# ./initpgSQL.sh
 
-sleep 5
+# sleep 5
 
-psql -U postgres -c "\i ${pg_config}"
+# psql -U postgres -c "\i ${pg_config}"
 
-./initpgSQL.sh
-sleep 3
+# ./initpgSQL.sh
+# sleep 3
 
 # # ## Install TPC-DS Database Generator
 # ####**********************************
@@ -36,17 +36,17 @@ sleep 3
 
 # # ## Install TPC-H Dataset Generator
 # ####**********************************
-cd "${baseline_path}/GDB/TPC-H"
-./run1Compile.sh
+# cd "${baseline_path}/GDB/TPC-H"
+# ./run1Compile.sh
 
 # ## Install DSB Dataset Generator
 # cd "${baseline_path}/GDB/DSB"
 # ./run1Compile.sh
 
 # Setup MEMORA
-memora_path="${path}/Baselines/MEMORA"
+# memora_path="${path}/Baselines/MEMORA"
 # rm -rf ${memora_path}
-mkdir -p ${memora_path}
+# mkdir -p ${memora_path}
 # cp -r /home/saeed/Documents/Github/MEMORA/* ${memora_path}
 # cd ${memora_path}
 
@@ -78,5 +78,23 @@ mkdir -p ${memora_path}
 # # Build
 # echo "===== Building ====="
 # cmake --build . -j$(nproc)
+
+
+### -------------------------------------
+# ### Setup SparkSQL Baelines
+# #******************
+sparksql_path="${path}/Baselines/SparkSQL"
+# rm -rf ${sparksql_path}
+mkdir -p ${sparksql_path}
+
+cd ${root_path}
+cp -r baselines/SparkSQL/* ${sparksql_path}
+cd ${sparksql_path}
+
+# rm -rf venv 
+# python3.10 -m venv venv
+# source venv/bin/activate
+# pip install --upgrade pip
+# pip install -r requirements.txt
 
 

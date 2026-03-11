@@ -1,0 +1,21 @@
+{
+    "columns": [
+        {
+            "name": "r_regionkey",
+            "type": "integer"
+        },
+        {
+            "name": "r_name",
+            "type": "character"
+        },
+        {
+            "name": "r_comment",
+            "type": "character varying"
+        }
+    ],
+    "indexes": [
+        "r_regionkey"
+    ],
+    "rows": 5,
+    "table": "region"
+}
