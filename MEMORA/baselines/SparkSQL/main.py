@@ -72,7 +72,8 @@ def register_parquet_tables(spark: SparkSession, data_dir: str):
 
 def load_and_execute_workload(spark: SparkSession, workload_dir: str, queries, iteration: int, output_path: str): 
 
-    log = LogWorkloadResults()    
+    log = LogWorkloadResults() 
+    workload_start_time = time.time()   
 
     for query in queries:
         query_fname = f"{workload_dir}/{query}.sql"
@@ -92,7 +93,7 @@ def load_and_execute_workload(spark: SparkSession, workload_dir: str, queries, i
             execution_time = -1.0
             print(f"Failed: {query}. Error: {str(e)[:200]}...")
 
-        result = {"query_id": query, "dbms":"SparkSQL", "iteration": iteration ,"start_time": start_time,
+        result = {"query_id": query, "dbms":"SparkSQL", "iteration": iteration ,"start_time": workload_start_time,
                       "planning_time": 0, "execution_time": execution_time}
         
         log.save_results_query_by_query(result, f"{output_path}-{iteration}.dat")

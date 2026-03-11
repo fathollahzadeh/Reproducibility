@@ -20,17 +20,17 @@ CMDSparkSQLReSequelExp1=./explocal/exp1_Baselines/runExperiment1-SparkSQL-ReSequ
 # $CMDD2PExp1 stats
 # $CMDD2PExp1 stats_ceb
 
-# $CMDSparkSQLWorkloadExp1 tpch
+$CMDSparkSQLWorkloadExp1 tpch
 # $CMDSparkSQLWorkloadExp1 imdb
 # $CMDSparkSQLWorkloadExp1 stats
 # $CMDSparkSQLWorkloadExp1 stats_ceb
 # $CMDSparkSQLWorkloadExp1 stackoverflow
 
 $CMDSparkSQLReSequelExp1 tpch gemini-2.5-pro
-$CMDSparkSQLReSequelExp1 imdb gemini-2.5-pro
-$CMDSparkSQLReSequelExp1 stats gemini-2.5-pro
-$CMDSparkSQLReSequelExp1 stats_ceb gemini-2.5-pro
-$CMDSparkSQLReSequelExp1 stackoverflow gemini-2.5-pro
+# $CMDSparkSQLReSequelExp1 imdb gemini-2.5-pro
+# $CMDSparkSQLReSequelExp1 stats gemini-2.5-pro
+# $CMDSparkSQLReSequelExp1 stats_ceb gemini-2.5-pro
+# $CMDSparkSQLReSequelExp1 stackoverflow gemini-2.5-pro
 
 
 
