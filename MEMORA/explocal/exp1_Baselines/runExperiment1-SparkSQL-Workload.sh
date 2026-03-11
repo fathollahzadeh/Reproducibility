@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dataset=$1
+llm_model=$2
 exp_path="$(pwd)"
 
 output_path="${exp_path}/results/Experiment1_SparkSQL_${dataset}"
