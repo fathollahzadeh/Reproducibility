@@ -14,9 +14,12 @@ CMDD2PExp1=./explocal/exp1_Baselines/runExperiment1-Data2Parquet.sh
 CMDSparkSQLWorkloadExp1=./explocal/exp1_Baselines/runExperiment1-SparkSQL-Workload.sh
 CMDSparkSQLReSequelExp1=./explocal/exp1_Baselines/runExperiment1-SparkSQL-ReSequel.sh
 CMDRunVerify=./explocal/exp1_Baselines/runExperiment1-Verify-LLM2Rule.sh
+CMDRunLLM2RuleReWrite=./explocal/exp1_Baselines/runExperiment1-LLM2Rule.sh
 
 
-$CMDRunVerify stats PostgreSQL
+# $CMDRunVerify stats PostgreSQL
+
+$CMDRunLLM2RuleReWrite stats PostgreSQL cc
 
 #------------------------------------
 # $CMDD2PExp1 tpch
