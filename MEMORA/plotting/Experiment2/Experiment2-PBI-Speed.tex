@@ -1,0 +1,161 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(0, 100) (1, 100) (2, 100) (3, 100) (4, 100) (5, 100) (6, 100) (7, 100) (8, 100) (9, 100) (10, 100) (11, 100) (12, 100) (13, 100) (14, 100) (15, 100) (16, 100) (17, 100) (18, 100) (19, 100) (20, 100) (21, 100) (22, 100) (23, 100) (24, 100) (25, 100) (26, 100) (27, 100) (28, 100) (29, 100) (30, 100) (31, 100) (32, 100) (33, 100) (34, 100) (35, 100) (36, 100) (37, 100) (38, 100) (39, 100) (40, 100) (41, 100) (42, 100) (43, 100) (44, 100) (45, 100) (46, 100) (47, 100) (48, 100) (49, 100) (50, 100) (51, 100) (52, 100) (53, 100) (54, 100) (55, 100) (56, 100) (57, 100) (58, 100) (59, 100) (60, 100) (61, 100) (62, 100) (63, 100) (64, 100) (65, 100) (66, 100) (67, 100) (68, 100) (69, 100) (70, 100) (71, 100) (72, 100) (73, 100) (74, 100) (75, 100) (76, 100) (77, 100) (78, 100) (79, 100) (80, 100) (81, 100) (82, 100) (83, 100) (84, 100) (85, 100) (86, 100) (87, 100) (88, 100) (89, 100) (90, 100) (91, 100) (92, 100) (93, 100) (94, 100) (95, 100) (96, 100) (97, 100) (98, 100) (99, 100)};
+}
+\makeatother
+
+\begin{tikzpicture}
+
+  \newcommand{\myaddplotexepo}[5]{    
+    \addplot[ybar, bar width=1.3pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] 
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-publicbibenchmark-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexept}[5]{    
+    \addplot[
+    xshift=#3,color=#1, smooth, line width=0.5pt] 
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-publicbibenchmark-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+  \newcommand{\myaddplotexepoz}[5]{    
+    \addplot[ybar, bar width=0.9pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5, discard if singlconfig={False}] 
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-publicbibenchmark-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexeptz}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.75pt, smooth, discard if singlconfig={False}] 
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-publicbibenchmark-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \pgfplotsset{
+    discard if singlconfig/.style n args={1}{
+        x filter/.code={
+            \edef\tempa{\thisrow{PN}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+            %
+            %
+            \else
+            \def\pgfmathresult{inf}
+            \fi			
+        }
+    },
+};
+
+
+\sffamily
+\begin{axis}[
+  %ymin=100,
+  name=ax1,
+  %ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0.09,upper},
+  enlarge x limits=0.02,
+  ylabel={},%{Speedup / Slowdown Factor},
+  xlabel={\#Query},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-5pt},
+  xlabel style = {font=\footnotesize, yshift=7pt},
+  height=.44\columnwidth,
+  width=0.46\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=1.5,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=2pt},
+  legend image post style={line width=.5pt},          
+  ytick={-200000,0,200000,400000,600000,800000},
+  yticklabels={-200,0,200,400,600,800},           
+  %ytick={1,10,100,1000, 10000},
+  %yticklabels={1$\texttt{x}$,10$\texttt{x}$,100$\texttt{x}$,$1\,000\texttt{x}$,10\,000$\texttt{x}$,100000$\texttt{x}$},       
+  xtick={0,10,20,30,40,50,60,70,80,90,99},
+  xticklabels={},%{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22},         
+  every x tick/.style={ draw=black, xshift=0pt},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+]
+\node [draw=none,inner sep=0, font=\tiny, anchor=west, text=gray] at (axis cs:500,-2) {\textit{slowdown}};
+
+\resetstackedplots
+\myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+\myaddplotexepo{color4}{True}{0pt}{DuckDB}{0.8};
+
+\myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7};
+\myaddplotexept{color4!120}{True}{0pt}{DuckDB}{1};
+ 
+\coordinate (c1) at (axis cs:0,0);
+\coordinate (c2) at (axis cs:99,0);
+\end{axis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{axis}[
+   name=ax2,
+   axis line style={gray, line width=0.3pt},
+   xtick align=inside,
+   xtick pos=left,
+   ytick pos=left,
+   scaled ticks=false,
+   enlarge x limits=0.02,
+   %xmin=-5,xmax=42,
+   ymin=-5000,ymax=12000,
+   xlabel={},
+   ylabel={},
+   % place second axis relative to first one
+   % anchor is south west
+   at={($(ax1.south west)+(16pt,28pt)$)},
+   % turn on grid
+   ymajorgrids=true,
+   grid style=dotted,
+   minor grid style={gray!70},
+   % to avoid clipping of a...e nodes
+   %clip=false,
+   yticklabel style = {font=\tiny},
+   xticklabel style = {font=\tiny, xshift=0pt, yshift=2pt, draw=none},
+   ylabel style = {font=\tiny, yshift=0pt, xshift=-5pt},
+   height=0.31\columnwidth,
+  width=0.35\columnwidth,
+  ytick={-4000,-2000,0,2000,4000,6000,8000,10000,12000},
+  yticklabels={-4,-2,0,2,4,6,8,10,12},  
+   %ytick={-5,-4,-3,-2,-1,0},
+   %yticklabels={-5$\texttt{x}$,-4$\texttt{x}$,-3$\texttt{x}$,-2$\texttt{x}$,-1$\texttt{x}$,0\texttt{x}},
+   xtick={0,10,20,30,40,50,60,70,80,90,99},
+   xticklabels={},
+   axis background/.style={fill=lightgray!20}, 
+ ]
+
+% \myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+\myaddplotexepo{color4}{True}{0pt}{DuckDB}{0.8};
+
+%\myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7};
+\myaddplotexept{color4!120}{True}{0pt}{DuckDB}{1};
+    
+
+\end{axis}
+
+
+\draw [black, densely dotted] (c1) -- (ax2.south west);
+\draw [black,densely dotted] (c2) -- (ax2.south east);
+
+
+\end{tikzpicture}

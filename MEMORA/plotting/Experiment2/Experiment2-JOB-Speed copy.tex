@@ -1,0 +1,144 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(0, 100) (1, 100) (2, 100) (3, 100) (4, 100) (5, 100) (6, 100) (7, 100) (8, 100) (9, 100) (10, 100) (11, 100) (12, 100) (13, 100) (14, 100) (15, 100) (16, 100) (17, 100) (18, 100) (19, 100) (20, 100) (21, 100) (22, 100) (23, 100) (24, 100) (25, 100) (26, 100) (27, 100) (28, 100) (29, 100) (30, 100) (31, 100) (32, 100) (33, 100) (34, 100) (35, 100) (36, 100) (37, 100) (38, 100) (39, 100) (40, 100) (41, 100) (42, 100) (43, 100) (44, 100) (45, 100) (46, 100) (47, 100) (48, 100) (49, 100) (50, 100) (51, 100) (52, 100) (53, 100) (54, 100) (55, 100) (56, 100) (57, 100) (58, 100) (59, 100) (60, 100) (61, 100) (62, 100) (63, 100) (64, 100) (65, 100) (66, 100) (67, 100) (68, 100) (69, 100) (70, 100) (71, 100) (72, 100) (73, 100) (74, 100) (75, 100) (76, 100) (77, 100) (78, 100) (79, 100) (80, 100) (81, 100) (82, 100) (83, 100) (84, 100) (85, 100) (86, 100) (87, 100) (88, 100) (89, 100) (90, 100) (91, 100) (92, 100) (93, 100) (94, 100) (95, 100) (96, 100) (97, 100) (98, 100) (99, 100)(100, 100) (101, 100) (102, 100) (103, 100) (103, 100) (104, 100) (105, 100) (106, 100) (107, 100) (108, 100) (109, 100) (110, 100) (111, 100) (112, 100)};
+}
+\makeatother
+
+\makeatletter
+\newcommand\resetstackedplotsn{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(0, 0) (1, 0) (2, 0) (3, 0) (4, 0) (5, 0) (6, 0) (7, 0) (8, 0) (9, 0) (10, 0) (11, 0) (12, 0) (13, 0) (14, 0) (15, 0) (16, 0) (17, 0) (18, 0) (19, 0) (20, 0) (21, 0) (22, 0) (23, 0) (24, 0) (25, 0) (26, 0) (27, 0) (28, 0) (29, 0) (30, 0) (31, 0) (32, 0) (33, 0) (34, 0) (35, 0) (36, 0) (37, 0) (38, 0) (39, 0) (40, 0) (41, 0) (42, 0) (43, 0) (44, 0) (45, 0) (46, 0) (47, 0) (48, 0) (49, 0) (50, 0) (51, 0) (52, 0) (53, 0) (54, 0) (55, 0) (56, 0) (57, 0) (58, 0) (59, 0) (60, 0) (61, 0) (62, 0) (63, 0) (64, 0) (65, 0) (66, 0) (67, 0) (68, 0) (69, 0) (70, 0) (71, 0) (72, 0) (73, 0) (74, 0) (75, 0) (76, 0) (77, 0) (78, 0) (79, 0) (80, 0) (81, 0) (82, 0) (83, 0) (84, 0) (85, 0) (86, 0) (87, 0) (88, 0) (89, 0) (90, 0) (91, 0) (92, 0) (93, 0) (94, 0) (95, 0) (96, 0) (97, 0) (98, 0) (99, 0)(100, 0) (101, 0) (102, 0) (103, 0) (103, 0) (104, 0) (105, 0) (106, 0) (107, 0) (108, 0) (109, 0) (110, 0) (111, 0) (112, 0)};
+}
+\makeatother
+
+\begin{tikzpicture}
+
+    \newcommand{\myaddplotexept}[8]{
+    \addplot[
+    xshift=#3,color=#1, line width=0.85pt,mark=#7, smooth,opacity=#8,discard if singlconfig={#2} ]%
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-imdb-#6-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+
+    \pgfplotsset{
+    discard if singlconfig/.style n args={1}{
+        x filter/.code={
+            \edef\tempa{\thisrow{PN}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+            %
+            %
+            \else
+            \def\pgfmathresult{inf}
+            \fi			
+        }
+    },
+};
+
+  \sffamily
+\begin{axis}[
+  ymin=100,
+  name=ax1,
+  ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0.18,upper},
+  enlarge x limits=0.02,
+  ylabel={Performance Impact [s]},%{Speedup / Slowdown Factor},
+  xlabel={},%{\#Query},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-18pt},
+  xlabel style = {font=\footnotesize, yshift=17pt},
+  height=0.34\columnwidth,
+  width=0.86\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=0.45,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=2pt},
+  legend image post style={line width=.5pt},          
+  ytick={100,1000,10000,100000,1000000},
+  yticklabels={,1,10,100,1000},           
+  xtick={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115},
+  xticklabels={},     
+  every x tick/.style={ draw=black, xshift=0pt},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+]
+\resetstackedplots 
+  \myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7}{gemini-2.5-pro}{diamond*}{1};
+  \myaddplotexept{color4}{True}{0pt}{PostgreSQL}{0.7}{LearnRewrite}{square}{0.7};
+  \myaddplotexept{teal1}{True}{0pt}{PostgreSQL}{0.7}{LLM-R2-Gemini}{*}{0.6};
+  \myaddplotexept{black}{True}{0pt}{PostgreSQL}{0.7}{LLM-R2-OSS-120B}{o}{1};
+  \myaddplotexept{blue}{True}{0pt}{PostgreSQL}{0.7}{gpt-oss-120b}{triangle}{0.7};
+  \myaddplotexept{mymauve}{True}{0pt}{PostgreSQL}{0.7}{R-Bot-Gemini}{triangle*}{0.6};
+  \myaddplotexept{saddlebrown}{True}{0pt}{PostgreSQL}{0.7}{R-Bot-OSS-120B}{triangle}{0.6};
+\end{axis}
+
+\begin{axis}[
+  %ymax=0,
+  name=ax2,
+  % ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0,upper},
+  %  enlarge y limits={rel=0.1, lower},
+  enlarge x limits=0.02,
+  ylabel={},%{Speedup / Slowdown Factor},
+  xlabel={\#Query},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-5pt},
+  xlabel style = {font=\footnotesize, yshift=7pt},
+  height=.29\columnwidth,
+  width=0.86\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=0.45,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=2pt},
+  legend image post style={line width=.5pt},          
+  ytick={0,-2000000,-4000000,-6000000},
+  yticklabels={0,-2e3,-4e3,-6e3},%{0,100,200,300,400,500,600},           
+  xtick={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115},
+  xticklabels={},     
+  every x tick/.style={ draw=black, xshift=0pt},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+  at={($(ax1.south west)+(0pt,-26.7pt)$)},
+  axis background/.style={fill=lightgray!20}, 
+ ]
+\resetstackedplotsn 
+
+
+\myaddplotexept{black}{False}{0pt}{PostgreSQL}{0.7}{LLM-R2-OSS-120B}{*}{1};
+\myaddplotexept{teal1}{False}{0pt}{PostgreSQL}{0.7}{LLM-R2-Gemini}{o}{0.6};
+
+\myaddplotexept{tug}{False}{0pt}{PostgreSQL}{0.7}{gemini-2.5-pro}{diamond*}{0.6};
+\myaddplotexept{color4}{False}{0pt}{PostgreSQL}{0.7}{LearnRewrite}{square}{0.7};
+\myaddplotexept{blue}{False}{0pt}{PostgreSQL}{0.7}{gpt-oss-120b}{diamond}{0.6};
+
+\myaddplotexept{mymauve}{False}{0pt}{PostgreSQL}{0.7}{R-Bot-Gemini}{triangle*}{0.6};
+\myaddplotexept{saddlebrown}{False}{0pt}{PostgreSQL}{0.7}{R-Bot-OSS-120B}{triangle}{0.6};
+
+\node [draw=none,inner sep=0, font=\footnotesize, anchor=west, text=gray, yshift=-15pt] at (axis cs:50,-10) {\textit{slowdown}};
+
+\end{axis}
+
+\end{tikzpicture}

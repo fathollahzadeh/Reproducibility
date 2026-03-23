@@ -83,13 +83,31 @@ mkdir -p ${baseline_path}
 ### -------------------------------------
 # ### Setup SparkSQL Baelines
 # #******************
-sparksql_path="${path}/Baselines/SparkSQL"
-# rm -rf ${sparksql_path}
-mkdir -p ${sparksql_path}
+# sparksql_path="${path}/Baselines/SparkSQL"
+# # rm -rf ${sparksql_path}
+# mkdir -p ${sparksql_path}
+
+# cd ${root_path}
+# cp -r baselines/SparkSQL/* ${sparksql_path}
+# cd ${sparksql_path}
+
+# rm -rf venv 
+# python3.10 -m venv venv
+# source venv/bin/activate
+# pip install --upgrade pip
+# pip install -r requirements.txt
+
+
+## Setup Workload Executor:
+#*************************
+wl_path="${path}/Baselines/Workload/"
+# rm -rf ${wl_path}
+mkdir -p ${wl_path}
 
 cd ${root_path}
-cp -r baselines/SparkSQL/* ${sparksql_path}
-cd ${sparksql_path}
+cd baselines
+cp -r Workload/* ${wl_path}
+cd ${wl_path}
 
 # rm -rf venv 
 # python3.10 -m venv venv

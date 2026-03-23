@@ -1,0 +1,44 @@
+\begin{tikzpicture} 
+  \begin{axis}[%
+  hide axis,
+  xmin=10,
+  xmax=50,
+  ymin=0,
+  ymax=0.4, 
+  legend columns=4,
+  legend style={draw=white!15!black,legend cell align=left},
+  legend style={draw=none, nodes={scale=1, transform shape,}, font=\huge},    
+  legend image post style={line width=0.5pt,scale=1},
+  legend cell align={left},   
+  /tikz/every even column/.append style={column sep=0.5em, row sep=0.3em},
+  legend image code/.code={\draw [#1] (-0.2cm,-0.2cm) rectangle (0.2cm,0.2cm); }, 
+  ]
+  \sffamily
+  \addlegendimage{color6,draw=black, fill=color6,line width=0.3pt}
+  \addlegendentry{\ PostgreSQL};
+
+  \addlegendimage{tug,draw=teal1, fill=teal1,line width=0.3pt}
+  \addlegendentry{\ LLM-R2 (Gemini)};
+
+  \addlegendimage{mymauve,draw=mymauve, fill=mymauve,line width=0.3pt}
+  \addlegendentry{\ R-Bot (Gemini)};
+
+  \addlegendimage{tug,draw=black, fill=tug,line width=0.3pt}
+  \addlegendentry{\ ReSequel (Gemini)};
+
+  \addlegendimage{color4,draw=black, fill=color4,line width=0.3pt}
+  \addlegendentry{\ LearnRewrite};
+  
+  \addlegendimage{tug,draw=teal3, fill=teal3,line width=0.3pt}
+  \addlegendentry{\ LLM-R2 (OSS-120B)}; 
+  
+   \addlegendimage{tug,draw=saddlebrown, fill=saddlebrown,line width=0.3pt}
+  \addlegendentry{\ R-Bot (OSS-120B)}; 
+
+  \addlegendimage{dred3,draw=black, fill=dred3,line width=0.3pt}
+  \addlegendentry{\ ReSequel (OSS-120B)};
+  
+  \end{axis}
+ 
+
+\end{tikzpicture}

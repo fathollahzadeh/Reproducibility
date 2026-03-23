@@ -13,20 +13,24 @@ CMDCatalogExp1=./explocal/exp1_Baselines/runExperiment1-Catalog.sh
 CMDD2PExp1=./explocal/exp1_Baselines/runExperiment1-Data2Parquet.sh
 CMDSparkSQLWorkloadExp1=./explocal/exp1_Baselines/runExperiment1-SparkSQL-Workload.sh
 CMDSparkSQLReSequelExp1=./explocal/exp1_Baselines/runExperiment1-SparkSQL-ReSequel.sh
+CMDRunVerify=./explocal/exp1_Baselines/runExperiment1-Verify-LLM2Rule.sh
 
 
+$CMDRunVerify stats PostgreSQL
+
+#------------------------------------
 # $CMDD2PExp1 tpch
 # $CMDD2PExp1 imdb
 # $CMDD2PExp1 stats
 # $CMDD2PExp1 stats_ceb
 
-$CMDSparkSQLWorkloadExp1 tpch
+# $CMDSparkSQLWorkloadExp1 tpch
 # $CMDSparkSQLWorkloadExp1 imdb
 # $CMDSparkSQLWorkloadExp1 stats
 # $CMDSparkSQLWorkloadExp1 stats_ceb
 # $CMDSparkSQLWorkloadExp1 stackoverflow
 
-$CMDSparkSQLReSequelExp1 tpch gemini-2.5-pro
+# $CMDSparkSQLReSequelExp1 tpch gemini-2.5-pro
 # $CMDSparkSQLReSequelExp1 imdb gemini-2.5-pro
 # $CMDSparkSQLReSequelExp1 stats gemini-2.5-pro
 # $CMDSparkSQLReSequelExp1 stats_ceb gemini-2.5-pro

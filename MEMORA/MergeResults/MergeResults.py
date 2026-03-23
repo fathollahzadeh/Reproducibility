@@ -115,9 +115,9 @@ if __name__ == '__main__':
     
     method_ID = {"": 0, "_gemini-2.5-pro":1}
     root_path = "../raw-results"
-    final_path= "../final-results"
+    final_path= "../results"
     dbms = ["SparkSQL"]  
-    workload = ['tpch','stats',"stats_ceb", "imdb"] #[,"stackoverflow","publicbibenchmark", "stats_ceb", "imdb", "tpch", "dsb", "imdb_13k"]
+    workload = ["stats", "stats_ceb", "imdb", "tpch"] #"stackoverflow","publicbibenchmark",, "dsb", "imdb_13k"
     llms = ["", "_gemini-2.5-pro"]
 
     df_statistics = pd.DataFrame(columns=["dataset_name","dbms","llm","total_queries","count" ,"ratio","baseline","time"]) 

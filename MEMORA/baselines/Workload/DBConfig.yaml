@@ -1,0 +1,14 @@
+---
+
+- database: Postgres
+  user: postgres
+  password: postgres
+  host: 127.0.0.1
+  port: 5432
+
+
+- database: MySQL
+  user: admin
+  password: admin
+  host: 127.0.0.1
+  port: 3306

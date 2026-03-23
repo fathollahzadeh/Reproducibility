@@ -1,0 +1,165 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(0, 100) (1, 100) (2, 100) (3, 100) (4, 100) (5, 100) (6, 100) (7, 100) (8, 100) (9, 100) (10, 100) (11, 100) (12, 100) (13, 100) (14, 100) (15, 100) (16, 100) (17, 100) (18, 100) (19, 100) (20, 100) (21, 100)};
+}
+\makeatother
+
+
+\begin{tikzpicture}
+
+  \newcommand{\myaddplotexepo}[5]{    
+    \addplot[ybar, bar width=2pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] 
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_tpch_gemini-2.5-pro-Speed-R10.dat};
+    \label{#4}  
+
+  };
+
+    \newcommand{\myaddplotexept}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.5pt] 
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_tpch_gemini-2.5-pro-Speed-R10.dat};
+    \label{#4}  
+
+  };
+
+   \newcommand{\myaddplotexepoz}[5]{    
+    \addplot[ybar, bar width=0.9pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] %, discard if singlconfig={False}
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_tpch_gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexeptz}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.5pt] %, discard if singlconfig={False}
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_tpch_gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \pgfplotsset{
+    discard if singlconfig/.style n args={1}{
+        x filter/.code={
+            \edef\tempa{\thisrow{PN}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+            %
+            %
+            \else
+            \def\pgfmathresult{inf}
+            \fi			
+        }
+    },
+};
+
+\sffamily
+\begin{axis}[
+  name=ax1,
+  % ymin=1000,
+  % ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0.18,upper},
+  enlarge x limits=0.02,
+  ylabel={Speedup / Slowdown Factor},
+  xlabel={\#Query},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-5pt},
+  xlabel style = {font=\footnotesize, yshift=7pt},
+  height=.55\columnwidth,
+  width=0.45\columnwidth,
+  bar width=20pt,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=1.5,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=2pt},
+  legend image post style={line width=.5pt},
+  ytick={-10000,0,20000,40000,60000},
+  yticklabels={-10,0,20,40,60},    
+  xtick={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21},
+   xticklabels={},
+  every x tick/.style={ draw=black, xshift=0pt},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+]
+% \node [draw=none,inner sep=0, font=\tiny, anchor=west, text=gray] at (axis cs:500,-2) {\textit{slowdown}};
+
+% \coordinate (c1) at (axis cs:0,1000);
+% \coordinate (c2) at (axis cs:145,1000);
+
+\resetstackedplots
+\myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+\myaddplotexepo{color4}{True}{0pt}{SparkSQL}{0.8};
+
+
+% \myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7};
+% \myaddplotexept{color4!120}{True}{0pt}{SparkSQL}{1};
+
+ 
+\end{axis}
+\node [draw=none,inner sep=0, font=\footnotesize, anchor=west] (l1) at (rel axis cs: 0.1,0.85) {\shortstack[l]{  
+  \ref{PostgreSQL} PostgreSQL \\
+  \ref{SparkSQL} SparkSQL
+  }};
+
+
+% \begin{axis}[
+%    name=ax2,
+%    axis line style={gray, line width=0.3pt},
+%    xtick align=inside,
+%    xtick pos=left,
+%    ytick pos=left,
+%    scaled ticks=false,
+%    enlarge x limits=0.02,
+%    %xmin=-5,xmax=42,
+%    %ymin=-100,
+%    ymax=10000,
+%    xlabel={},
+%    ylabel={},
+%    % place second axis relative to first one
+%    % anchor is south west
+%    at={($(ax1.south west)+(14pt,26pt)$)},
+%    % turn on grid
+%    ymajorgrids=true,
+%    grid style=dotted,
+%    minor grid style={gray!70},
+%    % to avoid clipping of a...e nodes
+%   %  clip=false,
+%    yticklabel style = {font=\tiny},
+%    xticklabel style = {font=\tiny, xshift=0pt, yshift=2pt, draw=none},
+%    ylabel style = {font=\tiny, yshift=0pt, xshift=-5pt},
+%    height=75pt,
+%    width=85pt,
+%    ytick={-20000,-10000,0,10000},
+%    yticklabels={-20,-10,0,10},               
+%    xtick={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145},
+%    xticklabels={},
+%    axis background/.style={fill=lightgray!20}, 
+%  ]
+
+% \myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+% \myaddplotexepo{color4}{True}{0pt}{SparkSQL}{0.8};
+
+% \myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7};
+% \myaddplotexept{color4!120}{True}{0pt}{SparkSQL}{1};
+   
+
+% \end{axis}
+
+
+% \draw [black, densely dotted] (c1) -- (ax2.south west);
+% \draw [black,densely dotted] (c2) -- (ax2.south east);
+
+
+\end{tikzpicture}

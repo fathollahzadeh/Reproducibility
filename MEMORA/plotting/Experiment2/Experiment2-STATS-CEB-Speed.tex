@@ -1,0 +1,165 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(0, 1000) (1, 1000) (2, 1000) (3, 1000) (4, 1000) (5, 1000) (6, 1000) (7, 1000) (8, 1000) (9, 1000) (10, 1000) (11, 1000) (12, 1000) (13, 1000) (14, 1000) (15, 1000) (16, 1000) (17, 1000) (18, 1000) (19, 1000) (20, 1000) (21, 1000) (22, 1000) (23, 1000) (24, 1000) (25, 1000) (26, 1000) (27, 1000) (28, 1000) (29, 1000) (30, 1000) (31, 1000) (32, 1000) (33, 1000) (34, 1000) (35, 1000) (36, 1000) (37, 1000) (38, 1000) (39, 1000) (40, 1000) (41, 1000) (42, 1000) (43, 1000) (44, 1000) (45, 1000) (46, 1000) (47, 1000) (48, 1000) (49, 1000) (50, 1000) (51, 1000) (52, 1000) (53, 1000) (54, 1000) (55, 1000) (56, 1000) (57, 1000) (58, 1000) (59, 1000) (60, 1000) (61, 1000) (62, 1000) (63, 1000) (64, 1000) (65, 1000) (66, 1000) (67, 1000) (68, 1000) (69, 1000) (70, 1000) (71, 1000) (72, 1000) (73, 1000) (74, 1000) (75, 1000) (76, 1000) (77, 1000) (78, 1000) (79, 1000) (80, 1000) (81, 1000) (82, 1000) (83, 1000) (84, 1000) (85, 1000) (86, 1000) (87, 1000) (88, 1000) (89, 1000) (90, 1000) (91, 1000) (92, 1000) (93, 1000) (94, 1000) (95, 1000) (96, 1000) (97, 1000) (98, 1000) (99, 1000) (100, 1000) (101, 1000) (102, 1000) (103, 1000) (104, 1000) (105, 1000) (106, 1000) (107, 1000) (108, 1000) (109, 1000) (110, 1000) (111, 1000) (112, 1000) (113, 1000) (114, 1000) (115, 1000) (116, 1000) (117, 118) (119, 1000) (120, 1000) (121, 1000) (122, 1000) (123, 1000) (124, 1000) (125, 1000) (126, 1000) (127, 1000) (128, 1000) (129, 1000) (130, 1000) (131, 1000) (132, 1000) (133, 1000) (134, 1000) (135, 1000) (136, 1000) (137, 1000) (138, 1000) (139, 1000) (140, 141) (142, 1000)  (143, 1000) (144, 1000) (145, 1000)};
+}
+\makeatother
+
+
+\begin{tikzpicture}
+
+  \newcommand{\myaddplotexepo}[5]{    
+    \addplot[ybar, bar width=1pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] 
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_stats_ceb_gemini-2.5-pro-Speed-R10.dat};
+    \label{#4}  
+
+  };
+
+    \newcommand{\myaddplotexept}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.5pt] 
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_stats_ceb_gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+   \newcommand{\myaddplotexepoz}[5]{    
+    \addplot[ybar, bar width=0.9pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] %, discard if singlconfig={False}
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_stats_ceb_gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexeptz}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.5pt] %, discard if singlconfig={False}
+    table[y=diff, col sep=comma, x=index] {../final-results/Experiment2_#4_stats_ceb_gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \pgfplotsset{
+    discard if singlconfig/.style n args={1}{
+        x filter/.code={
+            \edef\tempa{\thisrow{PN}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+            %
+            %
+            \else
+            \def\pgfmathresult{inf}
+            \fi			
+        }
+    },
+};
+
+\sffamily
+\begin{axis}[
+  name=ax1,
+  ymin=1000,
+  ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0.18,upper},
+  enlarge x limits=0.02,
+  ylabel={Speedup / Slowdown [s]},
+  xlabel={\#Query},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-5pt},
+  xlabel style = {font=\footnotesize, yshift=7pt},
+  height=.55\columnwidth,
+  width=0.65\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=1.5,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=2pt},
+  legend image post style={line width=.5pt},
+  ytick={1000,10000,100000,1000000,10000000,100000000,1000000000,10000000000},
+  yticklabels={1,10, $10^2$,$10^3$,$10^4$,$10^5$,$10^6$,$10^7$},                   
+  xtick={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145},
+  xticklabels={},%{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22},         
+  every x tick/.style={ draw=black, xshift=0pt},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+]
+\node [draw=none,inner sep=0, font=\tiny, anchor=west, text=gray] at (axis cs:500,-2) {\textit{slowdown}};
+
+\coordinate (c1) at (axis cs:0,1000);
+\coordinate (c2) at (axis cs:145,1000);
+
+\resetstackedplots
+\myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+\myaddplotexepo{color4}{True}{0pt}{SparkSQL}{0.8};
+
+
+\myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7};
+\myaddplotexept{color4!120}{True}{0pt}{SparkSQL}{1};
+
+ 
+\end{axis}
+
+\node [draw=none,inner sep=0, font=\footnotesize, anchor=west] (l1) at (rel axis cs: 0.1,0.15) {\shortstack[l]{  
+  \ref{PostgreSQL} PostgreSQL \\
+  \ref{SparkSQL} SparkSQL
+  }};
+
+\begin{axis}[
+   name=ax2,
+   axis line style={gray, line width=0.3pt},
+   xtick align=inside,
+   xtick pos=left,
+   ytick pos=left,
+   scaled ticks=false,
+   enlarge x limits=0.02,
+   %xmin=-5,xmax=42,
+   %ymin=-100,
+   ymax=10000,
+   xlabel={},
+   ylabel={},
+   % place second axis relative to first one
+   % anchor is south west
+   at={($(ax1.south west)+(24pt,26pt)$)},
+   % turn on grid
+   ymajorgrids=true,
+   grid style=dotted,
+   minor grid style={gray!70},
+   % to avoid clipping of a...e nodes
+  %  clip=false,
+   yticklabel style = {font=\tiny},
+   xticklabel style = {font=\tiny, xshift=0pt, yshift=2pt, draw=none},
+   ylabel style = {font=\tiny, yshift=0pt, xshift=-5pt},
+   height=75pt,
+   width=85pt,
+   ytick={-1000000,-500000,0},
+   yticklabels={-1000,-500,0},               
+   xtick={0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145},
+   xticklabels={},
+   axis background/.style={fill=lightgray!20}, 
+   legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+ ]
+
+\myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+\myaddplotexepo{color4}{True}{0pt}{SparkSQL}{0.8};
+
+\myaddplotexept{tug}{True}{0pt}{PostgreSQL}{0.7};
+\myaddplotexept{color4!120}{True}{0pt}{SparkSQL}{1};
+   
+
+\end{axis}
+
+
+\draw [black, densely dotted] (c1) -- (ax2.south west);
+\draw [black,densely dotted] (c2) -- (ax2.south east);
+
+
+\end{tikzpicture}

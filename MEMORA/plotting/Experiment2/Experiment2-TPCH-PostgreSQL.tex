@@ -1,0 +1,76 @@
+\pgfmathdeclarefunction{fpumod}{2}{%
+        \pgfmathfloatdivide{#1}{#2}%
+        \pgfmathfloatint{\pgfmathresult}%
+        \pgfmathfloatmultiply{\pgfmathresult}{#2}%
+        \pgfmathfloatsubtract{#1}{\pgfmathresult}%
+        % replaced `0' by `5' to make it work for this problem
+        \pgfmathfloatifapproxequalrel{\pgfmathresult}{#2}{\def\pgfmathresult{5}}{}%
+}
+
+\newcommand{\myaddplot}[5]{
+  \addplot[xshift=0pt,boxplot,fill=#4, draw=black, mark options={scale=0.6, fill=#4},mark=*, line width=.4pt] 
+  table[y=execution_start_time, col sep=comma, x=ID]{../archive/SIGMOD2026/results/runExperiment2-#1-#2#3-R10.dat}; 
+  \label{PostgreSQL#3}    
+};
+    
+\begin{tikzpicture}[
+  every axis/.style={
+  height=0.58\columnwidth,
+  width=0.5\columnwidth,  
+  }]
+  \sffamily
+ \begin{axis}[   
+  %axis y line*=left,	
+  every major tick/.append style={ thick,major tick length=2.5pt, gray},
+  axis line style={black},
+  ybar,  
+  % ymode=log,      
+  ybar=0pt,
+  ymin=-100,
+  %ymax=1,
+  log ticks with fixed point,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},
+  scaled y ticks=false,
+  enlarge y limits={0.05,upper},
+  enlarge x limits=0.1,
+  ylabel={},%{Execution Time [s]},
+  %xlabel={PostgreSQL},
+  ytick={0,50000,100000,150000,200000,250000,300000},
+  yticklabels={0,50,100,150,200,250,300},
+  xtick style={draw=none},
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=-2pt},
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=3pt, rotate=0, draw=none, anchor=south, inner ysep=0.5mm},
+  ymajorgrids,
+  grid style=dotted,
+  minor grid style={gray!80, dotted},
+  nodes near coords,
+  every node near coord/.style={font=\fontsize{0.1pt}{0.1}, rotate=0},
+  every axis plot/.append style={line width=0.8pt,mark options={scale=1.5,solid}},  
+  legend image post style={line width=.5pt},   
+  boxplot/draw direction=y,   
+  boxplot={
+      draw position={1 + floor(\plotnumofactualtype/8)+ 1/1*fpumod(\plotnumofactualtype,8)},
+      box extend=0.75,
+  },
+   %every boxplot/.append style={fill opacity=0.6, mark=*, mark size=1.5pt},
+  xtick={},
+  xticklabels={},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); },  
+%}
+]  
+  \myaddplot{tpch}{PostgreSQL}{}{color6}{color6!50};
+  \myaddplot{tpch}{PostgreSQL}{-LearnRewrite}{color4}{color4};
+  \myaddplot{tpch}{PostgreSQL}{-LLM-R2-Gemini}{teal1}{teal1};
+  \myaddplot{tpch}{PostgreSQL}{-LLM-R2-OSS-120B}{teal3}{teal3};
+  \myaddplot{tpch}{PostgreSQL}{-R-Bot-Gemini}{mymauve}{mymauve};
+  \myaddplot{tpch}{PostgreSQL}{-R-Bot-OSS-120B}{saddlebrown}{saddlebrown};
+  \myaddplot{tpch}{PostgreSQL}{-gemini-2.5-pro}{tug}{tug};
+  \myaddplot{tpch}{PostgreSQL}{-gpt-oss-120b}{dred3}{dred3};
+ 
+\end{axis}
+
+\end{tikzpicture}

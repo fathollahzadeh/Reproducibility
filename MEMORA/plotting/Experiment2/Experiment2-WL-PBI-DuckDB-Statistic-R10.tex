@@ -1,0 +1,96 @@
+\begin{tikzpicture}
+
+  \newcommand{\myaddplotwl}[5]{ 
+    \addplot[xshift=#2,fill=#3, draw=black,line width=0.3pt, discard if singlconfig={#1}{#4}{#5}]  table[y=time, col sep=comma, x=ratio] % 
+    {../archive/SIGMOD2026/results/runExperiment2-Statistics-R10.dat};  
+    \label{#5#1}
+  };
+  \newcommand{\myaddplotds}[2]{
+    \myaddplotwl{}{1}{black}{#1}{#2};
+    \myaddplotwl{-gemini-2.5-pro}{-0.5}{tug}{#1}{#2};   
+    \myaddplotwl{-gpt-oss-120b}{-2}{color4}{#1}{#2};    
+  };
+
+
+  \pgfplotsset{
+    discard if singlconfig/.style n args={3}{
+        x filter/.code={
+            \edef\tempa{\thisrow{llm}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+            %
+              \edef\tempc{\thisrow{dataset_name}}
+              \edef\tempd{#2}
+              \ifx\tempc\tempd
+              %
+                \edef\tempe{\thisrow{dbms}}
+                \edef\tempf{#3}
+                \ifx\tempe\tempf
+                \else
+                \def\pgfmathresult{inf}
+                \fi	
+              %
+              \else
+              \def\pgfmathresult{inf}
+              \fi			
+            %
+            \else
+            \def\pgfmathresult{inf}
+            \fi			
+        }
+    },
+};
+
+
+\begin{axis}[
+  ymin=0,
+  ybar,% stacked,
+  %ymode=log,
+  log origin=infty,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0.5,upper},
+  enlarge x limits=0.07,
+  ylabel={Execution Time [s]},
+  xlabel={Workload Fraction, Mean, and Median},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-3pt},
+  xlabel style = {font=\footnotesize},
+  height=0.5\columnwidth,
+  width=1\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},  
+  point meta=rawy,
+  nodes near coords,
+  every node near coord/.append style={font=\footnotesize, rotate=90, xshift=12pt, yshift=-5.5pt},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=1.5,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=3pt},
+  legend image post style={line width=.3pt},          
+  bar width=6.5pt,         
+  ytick={0,10,20,30,40,50,60},
+  %yticklabels={0,500,1000,1500,2000},  
+  xtick = data,
+  symbolic x coords={0.25, 0.5, 0.75, 0.95, 0.99, 1.0, mean, median},
+  xticklabels={25\%, 50\%, 75\%, 95\%, 99\%, 100\%, Mean, Median},
+  legend image code/.code={\draw [#1] (-0.10cm,-0.10cm) rectangle (0.10cm,0.10cm); }, 
+]
+
+\myaddplotds{publicbibenchmark}{DuckDB};
+
+\end{axis}
+
+\node [draw=none,inner sep=0, font=\footnotesize, anchor=west] (leg1) at (rel axis cs: 0.07,0.80) {\shortstack[l]{
+  \ref{DuckDB} DuckDB \\
+  \ref{DuckDB-gemini-2.5-pro} ReSequel (Gemini-2.5)\\
+  \ref{DuckDB-gpt-oss-120b} ReSequel (OSS-120B)}
+  };
+  
+
+\end{tikzpicture}

@@ -1,0 +1,16 @@
+SELECT COALESCE(SUM("t4"."$f4" * "t5"."EXPR$0"), 0)
+FROM (SELECT "t1"."postid0", "t1"."$f4" * "t3"."EXPR$0" AS "$f4"
+FROM (SELECT "t0"."postid" AS "postid0", "t"."EXPR$0" * "t0"."EXPR$0" AS "$f4"
+FROM (SELECT "postid", COUNT(*) AS "EXPR$0"
+FROM "comments"
+GROUP BY "postid") AS "t"
+INNER JOIN (SELECT "postid", COUNT(*) AS "EXPR$0"
+FROM "posthistory"
+GROUP BY "postid") AS "t0" ON "t"."postid" = "t0"."postid") AS "t1"
+INNER JOIN (SELECT "postid", COUNT(*) AS "EXPR$0"
+FROM "votes"
+WHERE CAST("creationdate" AS TIMESTAMP(0)) <= TIMESTAMP '2014-09-12 00:00:00'
+GROUP BY "postid") AS "t3" ON "t1"."postid0" = "t3"."postid") AS "t4"
+INNER JOIN (SELECT "id", COUNT(*) AS "EXPR$0"
+FROM "posts"
+GROUP BY "id") AS "t5" ON "t4"."postid0" = "t5"."id"

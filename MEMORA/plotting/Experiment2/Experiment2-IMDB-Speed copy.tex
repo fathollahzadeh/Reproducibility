@@ -1,0 +1,164 @@
+\makeatletter
+\newcommand\resetstackedplots{
+\makeatletter
+\pgfplots@stacked@isfirstplottrue
+\makeatother
+\addplot [forget plot,draw=none] coordinates{(0, 100) (100, 100) (2000, 100) (3000, 100) (4000, 100) (5000, 100) (6000, 100) (7000, 100) (8000, 100) (9000, 100) (10000, 100) (11000, 100) (12000, 100) (13000, 100)};
+}
+\makeatother
+
+\begin{tikzpicture}
+
+  \newcommand{\myaddplotexepo}[5]{    
+    \addplot[ybar, bar width=0.5pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] 
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-imdb_13k-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexept}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.5pt, smooth] 
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-imdb_13k-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexepoz}[5]{    
+    \addplot[ybar, bar width=0.9pt,
+    xshift=#3,fill=#1, draw=none,fill opacity=#5] %, discard if singlconfig={False}
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-imdb_13k-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \newcommand{\myaddplotexeptz}[5]{    
+    \addplot[
+    xshift=#3,color=#1, line width=0.5pt] %, discard if singlconfig={False}
+    table[y=diff, col sep=comma, x=index] {../archive/SIGMOD2026/results/runExperiment2-#4-imdb_13k-gemini-2.5-pro-Speed-R10.dat};
+    \label{#2}  
+
+  };
+
+    \pgfplotsset{
+    discard if singlconfig/.style n args={1}{
+        x filter/.code={
+            \edef\tempa{\thisrow{PN}}
+            \edef\tempb{#1}
+            \ifx\tempa\tempb
+            %
+            %
+            \else
+            \def\pgfmathresult{inf}
+            \fi			
+        }
+    },
+};
+
+\sffamily
+\begin{axis}[
+  name=ax1,
+  ymin=100,
+  % ymax=10000,
+  %ybar,
+  ymode=log,
+  y tick label style={/pgf/number format/1000 sep={}},
+  x tick label style={/pgf/number format/1000 sep={}},  
+  scaled y ticks=false,
+  scaled x ticks=false,
+  xtick scale label code/.code={},
+  axis line style={black, line width=0.3pt},
+  enlarge y limits={0.05,upper},
+  enlarge x limits=0.02,
+  ylabel={},%{Performance Impact [s]},
+  xlabel={\#Query},
+  log ticks with fixed point,
+  xtick align=outside,
+  xtick pos=left,
+  ytick pos=left,
+  yticklabel style = {font=\footnotesize},
+  ylabel style = {font=\footnotesize, yshift=0pt, xshift=-5pt},
+  xlabel style = {font=\footnotesize, yshift=7pt},
+  height=.44\columnwidth,
+  width=0.56\columnwidth,
+  ymajorgrids=true,
+  grid style=dotted,
+  minor grid style={gray!70},
+  every axis plot/.append style={line width=0.4pt,mark options={scale=1.5,solid}},  
+  xticklabel style = {font=\footnotesize, xshift=0pt, yshift=2pt},
+  legend image post style={line width=.5pt},          
+  ytick={100,1000,10000,100000,1000000,10000000,100000000},
+  yticklabels={0.1, 1, 10, $10^2$, $10^3$, $10^4$, $10^5$},          
+  xtick={0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000},
+  xticklabels={},        
+  every x tick/.style={ draw=black, xshift=0pt},
+  legend image code/.code={\draw [#1] (0cm,-0.1cm) rectangle (0.2cm,0.1cm); }, 
+]
+
+\coordinate (c1) at (axis cs:0,100);
+\coordinate (c2) at (axis cs:6000,100);
+
+\resetstackedplots
+% \myaddplotexepo{teal1}{True}{0pt}{MySQL}{1};
+\myaddplotexepo{tug}{True}{0pt}{PostgreSQL}{1};
+\myaddplotexepo{color4}{True}{0pt}{DuckDB}{0.6};
+
+\myaddplotexept{color4!120}{True}{0pt}{DuckDB}{1};
+% \myaddplotexept{teal1}{True}{0pt}{MySQL}{0.7};
+\myaddplotexept{tug}{True}{0pt}{PostgreSQL}{1};
+
+  
+\end{axis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{axis}[
+   name=ax2,
+   axis line style={gray, line width=0.3pt},
+   xtick align=inside,
+   xtick pos=left,
+   ytick pos=left,
+   scaled ticks=false,
+   enlarge x limits=0.02,
+   %xmin=-5,xmax=42,
+   %ymin=-4,
+   ymax=50000,
+   xlabel={},
+   ylabel={},
+   % place second axis relative to first one
+   % anchor is south west
+   at={($(ax1.south west)+(20pt,28pt)$)},
+   % turn on grid
+   ymajorgrids=true,
+   grid style=dotted,
+   minor grid style={gray!70},
+   % to avoid clipping of a...e nodes
+  %  clip=false,
+   yticklabel style = {font=\tiny},
+   xticklabel style = {font=\tiny, xshift=0pt, yshift=2pt, draw=none},
+   ylabel style = {font=\tiny, yshift=0pt, xshift=-5pt},
+   height=75pt,
+   width=90pt,
+  ytick={-800000,-400000,0},
+  yticklabels={-800, -400, 0},  
+  xtick={0,1000,2000,3000,4000,5000,6000,7000,8000,9000,10000,11000,12000,13000,14000},
+  xticklabels={},
+   axis background/.style={fill=lightgray!20}, 
+ ]
+
+\myaddplotexepoz{tug}{True}{0pt}{PostgreSQL}{1};
+% \myaddplotexepoz{teal1}{True}{0pt}{MySQL}{1};
+\myaddplotexepoz{color4}{True}{0pt}{DuckDB}{1};
+
+\myaddplotexeptz{color4!120}{True}{0pt}{DuckDB}{1};
+% \myaddplotexeptz{teal1}{True}{0pt}{MySQL}{0.7};
+\myaddplotexeptz{tug}{True}{0pt}{PostgreSQL}{0.7};
+    
+
+\end{axis}
+
+
+\draw [black, densely dotted] (c1) -- (ax2.south west);
+\draw [black,densely dotted] (c2) -- (ax2.south east);
+
+\end{tikzpicture}
