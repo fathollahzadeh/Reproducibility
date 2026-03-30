@@ -1,0 +1,29 @@
+SELECT MIN("t5"."info") AS "movie_budget", MIN("movie_info_idx"."info") AS "movie_votes", MIN("t6"."name") AS "writer", MIN("title"."title") AS "complete_violent_movie"
+FROM "complete_cast"
+INNER JOIN (SELECT *
+FROM "comp_cast_type"
+WHERE "kind" = 'cast') AS "t" ON "complete_cast"."subject_id" = "t"."id"
+INNER JOIN (SELECT *
+FROM "comp_cast_type"
+WHERE "kind" = 'complete+verified') AS "t0" ON "complete_cast"."status_id" = "t0"."id"
+INNER JOIN (SELECT *
+FROM "cast_info"
+WHERE "note" IN ('(head writer)', '(story editor)', '(story)', '(writer)', '(written by)')) AS "t1" ON "complete_cast"."movie_id" = "t1"."movie_id"
+CROSS JOIN (SELECT *
+FROM "info_type"
+WHERE "info" = 'genres') AS "t2"
+CROSS JOIN (SELECT *
+FROM "info_type"
+WHERE "info" = 'votes') AS "t3"
+CROSS JOIN (SELECT *
+FROM "keyword"
+WHERE "keyword" IN ('blood', 'death', 'female-nudity', 'gore', 'hospital', 'murder', 'violence')) AS "t4"
+INNER JOIN (SELECT *
+FROM "movie_info"
+WHERE "info" IN ('Action', 'Crime', 'Horror', 'Sci-Fi', 'Thriller', 'War')) AS "t5" ON "t1"."movie_id" = "t5"."movie_id" AND "t2"."id" = "t5"."info_type_id"
+INNER JOIN "movie_info_idx" ON "t1"."movie_id" = "movie_info_idx"."movie_id" AND "t3"."id" = "movie_info_idx"."info_type_id"
+INNER JOIN "movie_keyword" ON "t1"."movie_id" = "movie_keyword"."movie_id" AND "t4"."id" = "movie_keyword"."keyword_id"
+INNER JOIN (SELECT *
+FROM "name"
+WHERE "gender" = 'm') AS "t6" ON "t1"."person_id" = "t6"."id"
+INNER JOIN "title" ON "t5"."movie_id" = "title"."id"

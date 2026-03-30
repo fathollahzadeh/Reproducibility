@@ -22,22 +22,22 @@ publicbi_data="${root_path}/data/PublicBIbenchmark"
 
 # ## Load IMDB Dataset into PostgreSQL
 # # ***********************************
-# cd ${imdb_data}
-# psql -U postgres -c "DROP DATABASE IF EXISTS imdb;"
-# psql -U postgres -c "CREATE DATABASE imdb;"
-# psql -U postgres -d imdb -c "\i ${workload_path}/imdb/schema.sql;"
+cd ${imdb_data}
+psql -U postgres -c "DROP DATABASE IF EXISTS imdb;"
+psql -U postgres -c "CREATE DATABASE imdb;"
+psql -U postgres -d imdb -c "\i ${workload_path}/imdb/schema.sql;"
 # psql -U postgres -d imdb -c "\i ${workload_path}/imdb/import.sql;"
-# psql -U postgres  -d imdb -c "\i ${workload_path}/imdb/index.sql;"
-# echo '-------------------<< IMDB database (PostgreSQL) is ready >>-------------------'
+psql -U postgres  -d imdb -c "\i ${workload_path}/imdb/index.sql;"
+echo '-------------------<< IMDB database (PostgreSQL) is ready >>-------------------'
 
 # ## Load STATS Dataset into PostgreSQL
 # ***********************************
-cd ${stats_data}
-psql -U postgres -c "DROP DATABASE IF EXISTS stats;"
-psql -U postgres -c "CREATE DATABASE stats;"
-psql -U postgres -d stats -c "\i ${workload_path}/stats/schema.sql;"
+# cd ${stats_data}
+# psql -U postgres -c "DROP DATABASE IF EXISTS stats;"
+# psql -U postgres -c "CREATE DATABASE stats;"
+# psql -U postgres -d stats -c "\i ${workload_path}/stats/schema.sql;"
 # psql -U postgres -d stats -f "${workload_path}/stats/import.sql"
-echo '-------------------<< STATS database (PostgreSQL) is ready >>-------------------'
+# echo '-------------------<< STATS database (PostgreSQL) is ready >>-------------------'
 
 # ## Load STATS-CEB Dataset into PostgreSQL
 # ***********************************

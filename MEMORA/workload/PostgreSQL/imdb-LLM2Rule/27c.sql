@@ -1,0 +1,5 @@
+SELECT MIN("t"."name") AS "producing_company", MIN("t"."link") AS "link_type", MIN("title"."title") AS "complete_western_sequel"
+FROM (SELECT *
+FROM (VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)) AS "t" ("id", "movie_id", "subject_id", "status_id", "id0", "kind", "id1", "kind0", "imdb_id", "id2", "country_code", "md5sum", "name_pcode_nf", "name_pcode_sf", "name", "id3", "kind1", "id4", "keyword", "phonetic_code", "id5", "link", "id6", "movie_id0", "company_id", "company_type_id", "note", "id7", "movie_id1", "info_type_id", "info", "note0", "id8", "movie_id2", "keyword_id", "id9", "movie_id3", "linked_movie_id", "link_type_id")
+WHERE 1 = 0) AS "t",
+"title"

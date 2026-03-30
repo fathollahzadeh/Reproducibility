@@ -1,0 +1,802 @@
+{
+    "dataset_name": "imdb",
+    "number_of_tables": 21,
+    "table_names": [
+        "aka_name",
+        "aka_title",
+        "cast_info",
+        "char_name",
+        "comp_cast_type",
+        "company_name",
+        "company_type",
+        "complete_cast",
+        "info_type",
+        "keyword",
+        "kind_type",
+        "link_type",
+        "movie_companies",
+        "movie_info_idx",
+        "movie_keyword",
+        "movie_link",
+        "name",
+        "role_type",
+        "title",
+        "movie_info",
+        "person_info"
+    ],
+    "table_indexes": {
+        "aka_name": [
+            "id",
+            "person_id"
+        ],
+        "aka_title": [
+            "id",
+            "kind_id",
+            "movie_id"
+        ],
+        "cast_info": [
+            "id",
+            "movie_id",
+            "person_id",
+            "person_role_id",
+            "role_id"
+        ],
+        "char_name": [
+            "id"
+        ],
+        "comp_cast_type": [
+            "id"
+        ],
+        "company_name": [
+            "id"
+        ],
+        "company_type": [
+            "id"
+        ],
+        "complete_cast": [
+            "id",
+            "movie_id"
+        ],
+        "info_type": [
+            "id"
+        ],
+        "keyword": [
+            "id"
+        ],
+        "kind_type": [
+            "id"
+        ],
+        "link_type": [
+            "id"
+        ],
+        "movie_companies": [
+            "id",
+            "company_id",
+            "company_type_id",
+            "movie_id"
+        ],
+        "movie_info_idx": [
+            "id",
+            "info_type_id",
+            "movie_id"
+        ],
+        "movie_keyword": [
+            "id",
+            "keyword_id",
+            "movie_id"
+        ],
+        "movie_link": [
+            "id",
+            "linked_movie_id",
+            "link_type_id",
+            "movie_id"
+        ],
+        "name": [
+            "id"
+        ],
+        "role_type": [
+            "id"
+        ],
+        "title": [
+            "id",
+            "kind_id"
+        ],
+        "movie_info": [
+            "id",
+            "info_type_id",
+            "movie_id"
+        ],
+        "person_info": [
+            "id",
+            "info_type_id",
+            "person_id"
+        ]
+    },
+    "dependency": {
+        "aka_name": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "aka_title": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "cast_info": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "char_name": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "comp_cast_type": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "company_name": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "company_type": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "complete_cast": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "info_type": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "keyword": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "kind_type": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "link_type": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "movie_companies": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "movie_info_idx": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "movie_keyword": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "movie_link": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "name": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "role_type": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "title": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "movie_info": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        },
+        "person_info": {
+            "primary_key": [
+                "id"
+            ],
+            "foreign_key": []
+        }
+    },
+    "profile": {
+        "aka_name": {
+            "rows": 901343,
+            "person_id": {
+                "min": 4.0,
+                "max": 4167489.0,
+                "avg": 2156780.184464738,
+                "stddev": 1316370.613,
+                "sum": 1943998721806.0,
+                "distinct_count": 588222
+            },
+            "id": {
+                "distinct_count": 901343
+            },
+            "name": {
+                "distinct_count": 901343
+            },
+            "imdb_index": {
+                "distinct_count": 901343
+            },
+            "name_pcode_cf": {
+                "distinct_count": 901343
+            },
+            "name_pcode_nf": {
+                "distinct_count": 901343
+            },
+            "surname_pcode": {
+                "distinct_count": 901343
+            },
+            "md5sum": {
+                "distinct_count": 901343
+            }
+        },
+        "aka_title": {
+            "rows": 361472,
+            "episode_of_id": {
+                "min": 10.0,
+                "max": 25391.0,
+                "avg": 12245.160639777469,
+                "stddev": 7258.119525146739,
+                "sum": 35217082.0,
+                "distinct_count": 754
+            },
+            "season_nr": {
+                "min": 1.0,
+                "max": 63.0,
+                "avg": 3.2716851356515093,
+                "stddev": 6.115223642222786,
+                "sum": 8562.0,
+                "distinct_count": 40
+            },
+            "episode_nr": {
+                "min": 1.0,
+                "max": 4315.0,
+                "avg": 26.047049749325105,
+                "stddev": 136.406137543518,
+                "sum": 67540.0,
+                "distinct_count": 162
+            },
+            "kind_id": {
+                "min": 1.0,
+                "max": 7.0,
+                "avg": 1.4281659436968839,
+                "stddev": 1.0531844927279483,
+                "sum": 516242.0,
+                "distinct_count": 6
+            },
+            "production_year": {
+                "min": 1888.0,
+                "max": 2016.0,
+                "avg": 1976.8799296953464,
+                "stddev": 28.170891331997286,
+                "sum": 708592842.0,
+                "distinct_count": 128
+            },
+            "movie_id": {
+                "min": 0.0,
+                "max": 2525672.0,
+                "avg": 2006334.0905657976,
+                "stddev": 413548.74029444,
+                "sum": 725233596385.0,
+                "distinct_count": 205631
+            },
+            "id": {
+                "distinct_count": 361472
+            },
+            "md5sum": {
+                "distinct_count": 361472
+            },
+            "title": {
+                "distinct_count": 361472
+            },
+            "imdb_index": {
+                "distinct_count": 361472
+            },
+            "phonetic_code": {
+                "distinct_count": 361472
+            },
+            "note": {
+                "distinct_count": 361472
+            }
+        },
+        "cast_info": {
+            "rows": 36244344,
+            "person_role_id": {
+                "min": 1.0,
+                "max": 3140339.0,
+                "avg": 883355.2965702055,
+                "stddev": 1021329.3166,
+                "sum": 15521894377434.0,
+                "distinct_count": 3140339
+            },
+            "person_id": {
+                "min": 1.0,
+                "max": 4061926.0,
+                "avg": 1850621.620805911,
+                "stddev": 1113058.8924,
+                "sum": 67074566638327.0,
+                "distinct_count": 4051810
+            },
+            "movie_id": {
+                "min": 1.0,
+                "max": 2525975.0,
+                "avg": 1303597.1730585329,
+                "stddev": 733089.92562827,
+                "sum": 47248024377761.0,
+                "distinct_count": 2331601
+            },
+            "role_id": {
+                "min": 1.0,
+                "max": 11.0,
+                "avg": 3.6353581402935586,
+                "stddev": 3.2175650883598594,
+                "sum": 131761171.0,
+                "distinct_count": 11
+            },
+            "nr_order": {
+                "min": 0.0,
+                "max": 1115798165.0,
+                "avg": 6697.795366829736,
+                "stddev": 2087655.3248,
+                "sum": 72232916655.0,
+                "distinct_count": 1094
+            },
+            "id": {
+                "distinct_count": 36244344
+            },
+            "note": {
+                "distinct_count": 36244344
+            }
+        },
+        "char_name": {
+            "rows": 3140339,
+            "imdb_id": {
+                "distinct_count": 0
+            },
+            "id": {
+                "distinct_count": 3140339
+            },
+            "imdb_index": {
+                "distinct_count": 3140339
+            },
+            "md5sum": {
+                "distinct_count": 3140339
+            },
+            "name_pcode_nf": {
+                "distinct_count": 3140339
+            },
+            "surname_pcode": {
+                "distinct_count": 3140339
+            },
+            "name": {
+                "distinct_count": 3140339
+            }
+        },
+        "comp_cast_type": {
+            "rows": 4,
+            "id": {
+                "distinct_count": 4
+            },
+            "kind": {
+                "distinct_count": 4
+            }
+        },
+        "company_name": {
+            "rows": 234997,
+            "imdb_id": {
+                "distinct_count": 0
+            },
+            "id": {
+                "distinct_count": 234997
+            },
+            "country_code": {
+                "distinct_count": 234997
+            },
+            "md5sum": {
+                "distinct_count": 234997
+            },
+            "name_pcode_nf": {
+                "distinct_count": 234997
+            },
+            "name_pcode_sf": {
+                "distinct_count": 234997
+            },
+            "name": {
+                "distinct_count": 234997
+            }
+        },
+        "company_type": {
+            "rows": 4,
+            "id": {
+                "distinct_count": 4
+            },
+            "kind": {
+                "distinct_count": 4
+            }
+        },
+        "complete_cast": {
+            "rows": 135086,
+            "movie_id": {
+                "min": 285.0,
+                "max": 2528312.0,
+                "avg": 1511989.312711902,
+                "stddev": 740515.74148388,
+                "sum": 204248588297.0,
+                "distinct_count": 93514
+            },
+            "subject_id": {
+                "min": 1.0,
+                "max": 2.0,
+                "avg": 1.3638052795996625,
+                "stddev": 0.48109532476227773,
+                "sum": 184231.0,
+                "distinct_count": 2
+            },
+            "status_id": {
+                "min": 3.0,
+                "max": 4.0,
+                "avg": 3.1820469922863954,
+                "stddev": 0.3858846812175608,
+                "sum": 429850.0,
+                "distinct_count": 2
+            },
+            "id": {
+                "distinct_count": 135086
+            }
+        },
+        "info_type": {
+            "rows": 113,
+            "id": {
+                "distinct_count": 113
+            },
+            "info": {
+                "distinct_count": 113
+            }
+        },
+        "keyword": {
+            "rows": 134170,
+            "id": {
+                "distinct_count": 134170
+            },
+            "keyword": {
+                "distinct_count": 134170
+            },
+            "phonetic_code": {
+                "distinct_count": 134170
+            }
+        },
+        "kind_type": {
+            "rows": 7,
+            "id": {
+                "distinct_count": 7
+            },
+            "kind": {
+                "distinct_count": 7
+            }
+        },
+        "link_type": {
+            "rows": 18,
+            "id": {
+                "distinct_count": 18
+            },
+            "link": {
+                "distinct_count": 18
+            }
+        },
+        "movie_companies": {
+            "rows": 2609129,
+            "movie_id": {
+                "min": 2.0,
+                "max": 2525745.0,
+                "avg": 1650151.177068286,
+                "stddev": 688725.99539467,
+                "sum": 4305457290473.0,
+                "distinct_count": 1087236
+            },
+            "company_id": {
+                "min": 1.0,
+                "max": 234997.0,
+                "avg": 33739.30236105612,
+                "stddev": 48653.78432168,
+                "sum": 88030192230.0,
+                "distinct_count": 234997
+            },
+            "company_type_id": {
+                "min": 1.0,
+                "max": 2.0,
+                "avg": 1.5116201613641946,
+                "stddev": 0.4998650494039077,
+                "sum": 3944012.0,
+                "distinct_count": 2
+            },
+            "id": {
+                "distinct_count": 2609129
+            },
+            "note": {
+                "distinct_count": 2609129
+            }
+        },
+        "movie_info_idx": {
+            "rows": 1380035,
+            "movie_id": {
+                "min": 2.0,
+                "max": 2525793.0,
+                "avg": 1591796.733449514,
+                "stddev": 707835.83234493,
+                "sum": 2196735205046.0,
+                "distinct_count": 459925
+            },
+            "info_type_id": {
+                "min": 99.0,
+                "max": 113.0,
+                "avg": 100.0022680584188,
+                "stddev": 0.8329749853439404,
+                "sum": 138006630.0,
+                "distinct_count": 5
+            },
+            "id": {
+                "distinct_count": 1380035
+            },
+            "info": {
+                "distinct_count": 1380035
+            },
+            "note": {
+                "distinct_count": 1380035
+            }
+        },
+        "movie_keyword": {
+            "rows": 4523930,
+            "movie_id": {
+                "min": 2.0,
+                "max": 2525971.0,
+                "avg": 1859996.45831611,
+                "stddev": 585397.53002345,
+                "sum": 8414493777670.0,
+                "distinct_count": 476794
+            },
+            "keyword_id": {
+                "min": 1.0,
+                "max": 134170.0,
+                "avg": 13657.743475694804,
+                "stddev": 21254.28144296,
+                "sum": 61786675442.0,
+                "distinct_count": 134170
+            },
+            "id": {
+                "distinct_count": 4523930
+            }
+        },
+        "movie_link": {
+            "rows": 29997,
+            "movie_id": {
+                "min": 2.0,
+                "max": 186175.0,
+                "avg": 88683.6066273294,
+                "stddev": 49000.74471631,
+                "sum": 2660242148.0,
+                "distinct_count": 6411
+            },
+            "linked_movie_id": {
+                "min": 284.0,
+                "max": 2524994.0,
+                "avg": 1432750.5811914525,
+                "stddev": 785467.23916138,
+                "sum": 42978219184.0,
+                "distinct_count": 16169
+            },
+            "link_type_id": {
+                "min": 1.0,
+                "max": 17.0,
+                "avg": 7.2700936760342705,
+                "stddev": 3.312177446507151,
+                "sum": 218081.0,
+                "distinct_count": 16
+            },
+            "id": {
+                "distinct_count": 29997
+            }
+        },
+        "name": {
+            "rows": 4167491,
+            "imdb_id": {
+                "distinct_count": 0
+            },
+            "id": {
+                "distinct_count": 4167491
+            },
+            "imdb_index": {
+                "distinct_count": 4167491
+            },
+            "gender": {
+                "distinct_count": 4167491
+            },
+            "name_pcode_cf": {
+                "distinct_count": 4167491
+            },
+            "name_pcode_nf": {
+                "distinct_count": 4167491
+            },
+            "surname_pcode": {
+                "distinct_count": 4167491
+            },
+            "md5sum": {
+                "distinct_count": 4167491
+            },
+            "name": {
+                "distinct_count": 4167491
+            }
+        },
+        "role_type": {
+            "rows": 12,
+            "id": {
+                "distinct_count": 12
+            },
+            "role": {
+                "distinct_count": 12
+            }
+        },
+        "title": {
+            "rows": 2528312,
+            "episode_of_id": {
+                "min": 2.0,
+                "max": 2528186.0,
+                "avg": 817163.8963061407,
+                "stddev": 472759.49762545,
+                "sum": 1261099623269.0,
+                "distinct_count": 51481
+            },
+            "season_nr": {
+                "min": 1.0,
+                "max": 2013.0,
+                "avg": 3.734200758649868,
+                "stddev": 21.673041548206406,
+                "sum": 4121822.0,
+                "distinct_count": 96
+            },
+            "episode_nr": {
+                "min": 1.0,
+                "max": 91821.0,
+                "avg": 313.8178823926402,
+                "stddev": 1457.851084648597,
+                "sum": 345957227.0,
+                "distinct_count": 14906
+            },
+            "production_year": {
+                "min": 1880.0,
+                "max": 2019.0,
+                "avg": 1992.788669002507,
+                "stddev": 24.410353469512916,
+                "sum": 4894723399.0,
+                "distinct_count": 132
+            },
+            "imdb_id": {
+                "distinct_count": 0
+            },
+            "kind_id": {
+                "min": 1.0,
+                "max": 7.0,
+                "avg": 4.943030765190372,
+                "stddev": 2.6771471482944005,
+                "sum": 12497524.0,
+                "distinct_count": 6
+            },
+            "id": {
+                "distinct_count": 2528312
+            },
+            "md5sum": {
+                "distinct_count": 2528312
+            },
+            "title": {
+                "distinct_count": 2528312
+            },
+            "imdb_index": {
+                "distinct_count": 2528312
+            },
+            "phonetic_code": {
+                "distinct_count": 2528312
+            },
+            "series_years": {
+                "distinct_count": 2528312
+            }
+        },
+        "movie_info": {
+            "rows": 14835720,
+            "movie_id": {
+                "min": 1.0,
+                "max": 2526430.0,
+                "avg": 1687757.525817082,
+                "stddev": 676727.64557281,
+                "sum": 25039098080915.0,
+                "distinct_count": 2468825
+            },
+            "info_type_id": {
+                "min": 1.0,
+                "max": 110.0,
+                "avg": 15.7389803123812,
+                "stddev": 24.756477462869576,
+                "sum": 233499105.0,
+                "distinct_count": 71
+            },
+            "id": {
+                "distinct_count": 14835720
+            },
+            "info": {
+                "distinct_count": 14835720
+            },
+            "note": {
+                "distinct_count": 14835720
+            }
+        },
+        "person_info": {
+            "rows": 2963664,
+            "person_id": {
+                "min": 4.0,
+                "max": 4167491.0,
+                "avg": 1638434.0941537232,
+                "stddev": 1030725.6053,
+                "sum": 4855768141216.0,
+                "distinct_count": 550721
+            },
+            "info_type_id": {
+                "min": 15.0,
+                "max": 39.0,
+                "avg": 23.601375864470466,
+                "stddev": 6.5257229369508405,
+                "sum": 69946548.0,
+                "distinct_count": 22
+            },
+            "id": {
+                "distinct_count": 2963664
+            },
+            "info": {
+                "distinct_count": 2963664
+            },
+            "note": {
+                "distinct_count": 2963664
+            }
+        }
+    }
+}

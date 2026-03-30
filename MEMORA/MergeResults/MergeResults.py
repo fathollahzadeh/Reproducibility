@@ -97,28 +97,27 @@ def r_bind_dfs_speed(df_left, left_time, df_right, right_time, ratio):
 
 
 def calac_speed(dataset_name: str, dbms, llm_model: str, dfs, final_path):   
-    key_1 = f"{dbms}_{dataset_name}"
-    key_2 = f"{dbms}_{dataset_name}_{llm_model}"
-
+    key_1 = f"{dbms}-{dataset_name}"
+    key_2 = f"{dbms}-{dataset_name}-{llm_model}"
     ds_dbms,_,_ = r_bind_dfs_speed(df_left=dfs[key_1], left_time="execution_time", df_right=dfs[key_2], right_time="execution_time", ratio=1)
     df = pd.DataFrame(columns=ds_dbms.columns)
     
     df = ds_dbms.sort_values("diff", ascending=True).reset_index()
     df = df.drop(['index'], axis=1)
 
-    fname = f"{final_path}/Experiment2_{dbms}_{dataset_name}_{llm_model}-Speed-R10.dat"
+    fname = f"{final_path}/runExperiment2-{dbms}-{dataset_name}-{llm_model}-Speed-R10.dat"
     df.to_csv(fname, index=True, index_label="index" ) 
 
 
 
 if __name__ == '__main__':
     
-    method_ID = {"": 0, "_gemini-2.5-pro":1}
+    method_ID = {"": 0, "-LearnRewrite": 1, "-gemini-2.5-pro":2, "-gpt-oss-120b":3, "-LLM-R2-Gemini":4, "-LLM-R2-OSS-120B":5, "-R-Bot-Gemini":6, "-R-Bot-OSS-120B":7, "-cc":8}
     root_path = "../raw-results"
-    final_path= "../results"
-    dbms = ["SparkSQL"]  
-    workload = ["stats", "stats_ceb", "imdb", "tpch"] #"stackoverflow","publicbibenchmark",, "dsb", "imdb_13k"
-    llms = ["", "_gemini-2.5-pro"]
+    final_path= "../final-results"
+    dbms = ["PostgreSQL"] # , "MySQL", "DuckDB", 
+    workload = ["stats","stackoverflow","publicbibenchmark", "stats_ceb", "imdb", "tpch", "dsb", "imdb_13k"]
+    llms = ["", "-gemini-2.5-pro", "-gpt-oss-120b","-LearnRewrite", "-LLM-R2-Gemini", "-LLM-R2-OSS-120B", "-R-Bot-Gemini", "-R-Bot-OSS-120B", "-cc"]
 
     df_statistics = pd.DataFrame(columns=["dataset_name","dbms","llm","total_queries","count" ,"ratio","baseline","time"]) 
     dfs = dict()
@@ -127,46 +126,91 @@ if __name__ == '__main__':
       for llm in llms:  
         for wl in workload:
             df_exp2 = None
-            for it in range(2, 6):
-                fname_exp2 = f"{root_path}/{wl}/Experiment1_{dbm}_{wl}{llm}-{it}.dat"
+            for it in range(1, 11):
+                fname_exp2 = f"{root_path}/{wl}/runExperiment2-{wl}-{dbm}{llm}-{it}.dat"
                 if os.path.exists(fname_exp2):
                     df_tmp = read_results(path=fname_exp2)
                     if df_exp2 is None:
                         df_exp2 = df_tmp
                     else:
                         df_exp2 = mergse_dfs(df_base=df_exp2, df_new=df_tmp)
-                    
-                
+
             if df_exp2 is not None and len(df_exp2) > 0:         
                 df_exp2 = avg_results(df=df_exp2)
-                exe2_fname = f"{final_path}/Experiment1-{wl}-{dbm}{llm}-R10.dat" 
+                exe2_fname = f"{final_path}/runExperiment2-{wl}-{dbm}{llm}-R10.dat" 
                   
                 df_exp2 = df_exp2.sort_values(by='start_time', ascending=True).reset_index(drop=True)                
                 df_statistics = add_statistics(df_statistics=df_statistics, dbms=dbm, data=df_exp2,dataset_name=wl, baseline=dbm, llm=llm)
                 df_exp2["ID"] = method_ID[llm]
                 df_exp2.to_csv(exe2_fname, index=True, index_label="index")   
 
-                key = f"{dbm}_{wl}{llm}"
+                key = f"{dbm}-{wl}{llm}"
                 dfs[key] = df_exp2             
 
-    exe2_statistics_fname = f"{final_path}/Experiment1-Statistics-R10.dat"
+    exe2_statistics_fname = f"{final_path}/runExperiment2-Statistics-R10.dat"
     df_statistics.to_csv(exe2_statistics_fname, index=True, index_label="index")
 
-    calac_speed(dataset_name="imdb", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
-       
-    calac_speed(dataset_name="tpch", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
-    
-    # calac_speed(dataset_name="dsb", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
-    
-    calac_speed(dataset_name="stats", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='cc', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='gpt-oss-120b', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='LLM-R2-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='LLM-R2-OSS-120B', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='R-Bot-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="imdb", dbms='PostgreSQL', llm_model='R-Bot-OSS-120B', dfs=dfs, final_path=final_path)
    
-    calac_speed(dataset_name="stats_ceb", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
-        
-    # calac_speed(dataset_name="stackoverflow", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    #calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='gpt-oss-120b', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='LLM-R2-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='LLM-R2-OSS-120B', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='R-Bot-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="tpch", dbms='PostgreSQL', llm_model='R-Bot-OSS-120B', dfs=dfs, final_path=final_path)
 
-    # calac_speed(dataset_name="publicbibenchmark", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='gpt-oss-120b', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='LLM-R2-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='LLM-R2-OSS-120B', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='R-Bot-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="dsb", dbms='PostgreSQL', llm_model='R-Bot-OSS-120B', dfs=dfs, final_path=final_path)
+
+    calac_speed(dataset_name="stats", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="stats", dbms='PostgreSQL', llm_model='cc', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="stats", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    calac_speed(dataset_name="stats", dbms='PostgreSQL', llm_model='R-Bot-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats", dbms='DuckDB', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats", dbms='DuckDB', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats", dbms='MySQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats", dbms='MySQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+
+    # calac_speed(dataset_name="stats_ceb", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats_ceb", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats_ceb", dbms='PostgreSQL', llm_model='R-Bot-Gemini', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats_ceb", dbms='DuckDB', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats_ceb", dbms='DuckDB', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats_ceb", dbms='MySQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stats_ceb", dbms='MySQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
     
-    # calac_speed(dataset_name="imdb_13k", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
-    
-    # calac_speed(dataset_name="publicbibenchmark", dbms='SparkSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
-    
+    # calac_speed(dataset_name="stackoverflow", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stackoverflow", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stackoverflow", dbms='DuckDB', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stackoverflow", dbms='DuckDB', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stackoverflow", dbms='MySQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="stackoverflow", dbms='MySQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+
+    # calac_speed(dataset_name="publicbibenchmark", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="publicbibenchmark", dbms='PostgreSQL', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="publicbibenchmark", dbms='DuckDB', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="publicbibenchmark", dbms='DuckDB', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+
+    # calac_speed(dataset_name="imdb_13k", dbms='PostgreSQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="imdb_13k", dbms='MySQL', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="imdb_13k", dbms='DuckDB', llm_model='gemini-2.5-pro', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="imdb_13k", dbms='DuckDB', llm_model='LearnRewrite', dfs=dfs, final_path=final_path)
+
+
+        
+    # calac_speed(dataset_name="publicbibenchmark", dbms='PostgreSQL', llm_model='gpt-oss-120b', dfs=dfs, final_path=final_path)
+    # calac_speed(dataset_name="publicbibenchmark", dbms='DuckDB', llm_model='gpt-oss-120b', dfs=dfs, final_path=final_path)
+

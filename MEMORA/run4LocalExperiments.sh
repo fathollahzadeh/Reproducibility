@@ -18,8 +18,10 @@ CMDRunLLM2RuleReWrite=./explocal/exp1_Baselines/runExperiment1-LLM2Rule.sh
 
 
 # $CMDRunVerify stats PostgreSQL
+$CMDRunVerify imdb PostgreSQL
 
-$CMDRunLLM2RuleReWrite stats PostgreSQL cc
+# $CMDRunLLM2RuleReWrite stats PostgreSQL cc
+# $CMDRunLLM2RuleReWrite imdb PostgreSQL cc
 
 #------------------------------------
 # $CMDD2PExp1 tpch
